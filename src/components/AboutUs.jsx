@@ -197,7 +197,7 @@
 
 
 import React, { useRef, useState } from 'react';
-import log1 from "../assets/log1.jpg";
+import log1 from "../../public/img/log1.jpg";
 import { useNavigate } from 'react-router-dom';
 
 import {
