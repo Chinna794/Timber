@@ -504,7 +504,7 @@ export default function Navbar() {
   return (
     <header
       style={{
-        backgroundImage: `url('/src/assets/walnut-3.jpg')`,
+        backgroundImage: `url('/img/walnut-3.jpg')`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
