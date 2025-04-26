@@ -1,86 +1,74 @@
-import React from 'react';
-import { motion as MOTION } from 'framer-motion';
-import { useKeenSlider } from 'keen-slider/react';
-import 'keen-slider/keen-slider.min.css';
+import React from "react";
+
+const luxury = {
+  bg: "bg-[#F8F4EF] dark:bg-[#231915]",
+  heading: "text-[#674C28] dark:text-[#FFD700]",
+  tabActive:
+    "from-[#BFA77A] to-[#D8C69C] text-black dark:from-[#FFD700] dark:to-[#DAA520] dark:text-black",
+  tabInactive:
+    "bg-white text-[#5A4A30] border-[#CBB27D] dark:bg-[#1C1C1C] dark:text-[#EADCA6] dark:border-[#7F6E3C] hover:ring-yellow-500",
+  cardBg:
+    "bg-[#FFFDF8]/70 dark:bg-[#1B1B1B]/80 border-[#EADCA6] dark:border-[#5F4E2A]",
+  gradientBox:
+    "from-[#F0E5CF] via-[#E5D4B7] to-[#D9C7A5] dark:from-[#3B2C1A] dark:via-[#2A1F12] dark:to-[#1C140A]",
+  textMain: "text-[#4A3B21] dark:text-[#FAF3E0]",
+  textSub: "text-[#7A684A] dark:text-[#D6C49A]",
+  textLabel: "text-[#5F4E2A] dark:text-[#FFEBC1]",
+};
 
 const testimonials = [
   {
-    name: 'Arun Sharma',
-    position: 'Architect, Bangalore',
-    quote: 'SVM Timbers brought unmatched quality and a timeless aesthetic to our latest project.',
-    image: '/img/clients/arun.jpg',
+    name: "John Doe",
+    role: "Interior Designer",
+    content:
+      "The quality of timber from SVM Timbers is unparalleled. My clients love the finish and grain!",
+    image: "/testimonials/john.jpg",
   },
   {
-    name: 'Meera Iyer',
-    position: 'Interior Designer, Chennai',
-    quote: 'Their timbers not only look luxurious but also carry a story in every grain.',
-    image: '/img/clients/meera.jpg',
+    name: "Saira Malik",
+    role: "Architect",
+    content:
+      "Elegant selection and superb service. My go-to supplier for premium wood!",
+    image: "/testimonials/saira.jpg",
   },
   {
-    name: 'Rahul Nair',
-    position: 'Builder, Kochi',
-    quote: 'We rely on SVM Timbers for consistency, elegance, and eco-conscious sourcing.',
-    image: '/img/clients/rahul.jpg',
+    name: "Ravi Nair",
+    role: "Furniture Maker",
+    content:
+      "Their teak is top-tier. Love the sustainability and the craftsmanship behind every log.",
+    image: "/testimonials/ravi.jpg",
   },
 ];
 
-export default function TestimonialsSection() {
-  const [sliderRef] = useKeenSlider({
-    loop: true,
-    mode: 'free-snap',
-    slides: {
-      perView: 1,
-      spacing: 16,
-      breakpoints: {
-        '(min-width: 768px)': {
-          perView: 2,
-        },
-        '(min-width: 1024px)': {
-          perView: 3,
-        },
-      },
-    },
-  });
-
+function TestimonialsSection() {
   return (
-    <section className="py-16 px-6 sm:px-10 bg-[#F8F4EF] dark:bg-[#231915] transition-colors duration-500">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 text-[#674C28] dark:text-[#FFD700] font-playfair">
+    <section className={`${luxury.bg} py-16 px-4 md:px-12`}>
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className={`text-3xl md:text-4xl font-semibold mb-10 ${luxury.heading}`}>
           What Our Clients Say
         </h2>
-
-        <div ref={sliderRef} className="keen-slider">
-          {testimonials.map((testimonial, index) => (
-            <MOTION.div
+        <div className="grid md:grid-cols-3 gap-8">
+          {testimonials.map((t, index) => (
+            <div
               key={index}
-              className="keen-slider__slide"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: 'spring', stiffness: 300 }}
+              className={`p-6 rounded-xl shadow-md border ${luxury.cardBg}`}
             >
-              <div className="bg-white dark:bg-[#1C1C1C] shadow-xl rounded-2xl p-6 flex flex-col h-full transition-colors border border-[#EADCA6] dark:border-[#5F4E2A]">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-[#D8C69C] dark:border-[#FFD700]"
-                  />
-                  <div className="ml-4">
-                    <p className="text-lg font-semibold text-[#4A3B21] dark:text-[#FFEBC1]">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-sm text-[#7A684A] dark:text-[#D6C49A]">
-                      {testimonial.position}
-                    </p>
-                  </div>
-                </div>
-                <div className="text-lg leading-relaxed text-[#5F4E2A] dark:text-[#FAF3E0] font-playfair flex-1">
-                  “{testimonial.quote}”
-                </div>
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-20 h-20 rounded-full object-cover mb-4 border-4 border-[#CBB27D] dark:border-[#7F6E3C]"
+                />
+                <p className={`italic mb-4 ${luxury.textSub}`}>"{t.content}"</p>
+                <h4 className={`font-semibold ${luxury.textMain}`}>{t.name}</h4>
+                <span className={`text-sm ${luxury.textLabel}`}>{t.role}</span>
               </div>
-            </MOTION.div>
+            </div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+export default TestimonialsSection;

@@ -5,11 +5,11 @@ export const timberData = {
         {
           id: 1,
           name: "Burma Teak Log",
-          title: "Premium quality teak log from Myanmar",
-          image: '/img/log1.jpg',
-          price: "₹1,200/cft",
-          grade: "A+",
-          moisture: "12%",
+          images: [
+            '/img/log1.jpg',
+            '/img/log1.jpg',
+            '/img/log1.jpg',
+          ],
         },
         {
           id: 2,
@@ -29,11 +29,11 @@ export const timberData = {
         {
           id: 3,
           name: "Hunsur Teak Wood",
-          title: "Perfect for traditional Indian woodwork",
-          image: '/img/log1.jpg',
-          price: "₹950/cft",
-          grade: "B+",
-          moisture: "13%",
+          images: [
+            '/img/log1.jpg',
+            '/img/log1.jpg',
+            '/img/log1.jpg',
+          ],
         },
       ],
     },
@@ -126,3 +126,120 @@ export const timberData = {
     },
   };
   
+
+// export const timberData = {
+//   "Burma Teak": {
+//     description:
+//       "Burma teak, known for its high quality and durability, is prized for its exceptional oil content, which provides natural resistance to water, decay, and pests.",
+//     products: [
+//       {
+//         id: 1,
+//         name: "Burma Teak Log",
+//         description: "Raw unprocessed logs straight from the source, perfect for custom milling.",
+//         images: [
+//           "/img/Burma/Burma Teak logs.jpeg",
+//           "/img/Burma/burma-log2.jpg",
+//           "/img/Burma/burma-log3.jpg",
+//         ],
+//       },
+//       {
+//         id: 2,
+//         name: "Burma Teak Plank",
+//         description: "Smooth-surfaced planks ideal for furniture and interiors.",
+//         images: [
+//           "/img/Burma/Burma Teak Cut Sizes1.jpeg",
+//           "/img/Burma/Burma Teak Cut Sizes.jpeg",
+//           "/img/Burma/burma-plank3.jpg",
+//         ],
+//       },
+//     ],
+//   },
+
+//   "Hunsur Teak": {
+//     description:
+//       "Hunsur teak is valued for its golden-brown color and straight grain. Sourced from Karnataka, India, it's used in traditional Indian carpentry.",
+//     products: [
+//       {
+//         id: 3,
+//         name: "Hunsur Teak Wood",
+//         description: "Well-seasoned timber logs for long-lasting structural use.",
+//         images: [
+//           "/img/Hunsur/hunsur1.jpg",
+//           "/img/Hunsur/hunsur2.jpg",
+//           "/img/Hunsur/hunsur3.jpg",
+//         ],
+//       },
+//     ],
+//   },
+
+//   "Balharshah Teak": {
+//     description:
+//       "Balharshah teak offers a cost-effective option with reasonable strength and a straight, even texture. Commonly used in utility-grade furniture.",
+//     products: [
+//       {
+//         id: 4,
+//         name: "Balharshah Teak Board",
+//         description: "Versatile board-cut wood for day-to-day carpentry needs.",
+//         images: [
+//           "/img/Balharshah/bal1.jpg",
+//           "/img/Balharshah/bal2.jpg",
+//           "/img/Balharshah/bal3.jpg",
+//         ],
+//       },
+//     ],
+//   },
+
+//   "Mysore Teak": {
+//     description:
+//       "Mysore teak is a premium variety known for its durability, smooth grain, and rich golden-brown color. It’s often used for luxury furniture and interiors.",
+//     products: [
+//       {
+//         id: 5,
+//         name: "Mysore Teak Log",
+//         description: "High-quality logs ideal for premium woodworking.",
+//         images: [
+//           "/img/Mysore/mysore-log1.jpg",
+//           "/img/Mysore/mysore-log2.jpg",
+//           "/img/Mysore/mysore-log3.jpg",
+//         ],
+//       },
+//       {
+//         id: 6,
+//         name: "Mysore Teak Plank",
+//         description: "Elegant and smooth planks suitable for classic furniture.",
+//         images: [
+//           "/img/Mysore/mysore-plank1.jpg",
+//           "/img/Mysore/mysore-plank2.jpg",
+//           "/img/Mysore/mysore-plank3.jpg",
+//         ],
+//       },
+//     ],
+//   },
+
+//   "Mathi Logs": {
+//     description:
+//       "Mathi is a durable hardwood popular in traditional South Indian architecture, especially for doors and structural uses.",
+//     products: [
+//       {
+//         id: 7,
+//         name: "Mathi Log",
+//         description: "Durable raw logs ideal for beams, rafters, and more.",
+//         images: [
+//           "/img/Mathi/mathi-log1.jpg",
+//           "/img/Mathi/mathi-log2.jpg",
+//           "/img/Mathi/mathi-log3.jpg",
+//         ],
+//       },
+//       {
+//         id: 8,
+//         name: "Mathi Plank",
+//         description: "Seasoned planks used for classic Indian joinery.",
+//         images: [
+//           "/img/Mathi/mathi-plank1.jpg",
+//           "/img/Mathi/mathi-plank2.jpg",
+//           "/img/Mathi/mathi-plank3.jpg",
+//         ],
+//       },
+//     ],
+//   },
+// };
