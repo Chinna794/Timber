@@ -116,8 +116,9 @@ export default function AboutUs() {
             ))}
           </div>
 
-          {/* Cards */}
-          <div className="relative h-[70vh]">
+         
+{/* Cards */}
+<div className="relative h-[90vh] md:h-[70vh]">
             {steps.map((step, i) => {
               // Combine all styles into a single style object
               const cardStyle = {
@@ -167,21 +168,17 @@ export default function AboutUs() {
                         {step.description}
                       </p>
 
-                      {/* Outside the .relative h-[70vh] div, but inside section */}
-{current === 0 && (
-  <div className="flex justify-center mt-8">
-    <MOTION.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      onClick={handleLearnMore}
-      className="px-6 py-2 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-white font-semibold rounded-full shadow-lg"
-    >
-      Learn More
-    </MOTION.button>
-  </div>
-)}
-
+                      {i === 0 && (
+                        <MOTION.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          transition={{ duration: 0.3 }}
+                          onClick={handleLearnMore}
+                          className="mt-6 px-6 py-2 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-white font-semibold rounded-full shadow-lg"
+                        >
+                          Learn More
+                        </MOTION.button>
+                      )}
                     </div>
                   </div>
                 </MOTION.div>
