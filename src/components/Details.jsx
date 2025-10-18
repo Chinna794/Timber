@@ -4,25 +4,25 @@ import { motion as MOTION, useInView } from 'framer-motion';
 export default function Details() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [showMap, setShowMap] = useState(false); 
-  
+  const [showMap, setShowMap] = useState(false);
+
   useEffect(() => {
     const hash = window.location.hash;
-    
+
     if (hash === '#our-story') {
       // Prevent default scroll behavior
       window.history.scrollRestoration = 'manual';
-      
+
       // Immediately set scroll position to prevent flashing of other content
       window.scrollTo(0, 0);
-      
+
       // Then scroll to the correct position after a short delay
       setTimeout(() => {
         const element = document.getElementById('our-story');
         if (element) {
           const yOffset = -150; // Adjust as needed
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({top: y, behavior: 'smooth'});
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 100);
     }
@@ -33,16 +33,35 @@ export default function Details() {
       <div id="our-story" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* LEFT: Overlapping Images */}
         <div className="w-full relative h-96 md:h-[500px]">
+          {/* 1st Image - Burma Teak Cut Sizes */}
           <div className="absolute top-0 left-0 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-10 rounded-xl shadow-lg overflow-hidden">
-            <img src="/img/sawmill.jpg" alt="Raw timber logs" className="w-full h-full object-cover" />
+            <img
+              src="/img/Burma/Burma Teak Cut Sizes.jpeg"
+              alt="Burma Teak Cut Sizes"
+              className="w-full h-full object-cover"
+            />
           </div>
+
+          {/* 2nd Image - Hunsur Teak Logs */}
           <div className="absolute top-1/4 right-0 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-20 rounded-xl shadow-lg overflow-hidden">
-            <img src="/img/sawmill.jpg" alt="Sawmill at SVM Timbers" className="w-full h-full object-cover" />
+            <img
+              src="/img/Hunsur/Hunsur Teak Logs.jpeg"
+              alt="Hunsur Teak Logs"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="absolute bottom-0 left-1/4 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-30 rounded-xl shadow-lg overflow-hidden">
-            <img src="/img/sawmill.jpg" alt="Processed timber planks" className="w-full h-full object-cover" />
+
+          {/* 3rd Image - Matti Wood Logs */}
+          <div className="hidden md:block absolute bottom-0 left-1/4 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-30 rounded-xl shadow-lg overflow-hidden">
+            <img
+              src="/img/Matti/Matti Wood Logs.jpeg"
+              alt="Matti Wood Logs"
+              className="w-full h-full object-cover"
+            />
           </div>
+
         </div>
+
 
         {/* RIGHT: Our Story Content */}
         <div>
@@ -188,4 +207,3 @@ export default function Details() {
     </div>
   );
 }
-     
