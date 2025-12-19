@@ -1,209 +1,901 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion as MOTION, useInView } from 'framer-motion';
+// // import React, { useRef, useState, useEffect } from 'react';
+// // import { motion as MOTION, useInView } from 'framer-motion';
+
+// // export default function Details() {
+// //   const ref = useRef(null);
+// //   const isInView = useInView(ref, { once: true });
+// //   const [showMap, setShowMap] = useState(false);
+
+// //   useEffect(() => {
+// //     const hash = window.location.hash;
+
+// //     if (hash === '#our-story') {
+// //       // Prevent default scroll behavior
+// //       window.history.scrollRestoration = 'manual';
+
+// //       // Immediately set scroll position to prevent flashing of other content
+// //       window.scrollTo(0, 0);
+
+// //       // Then scroll to the correct position after a short delay
+// //       setTimeout(() => {
+// //         const element = document.getElementById('our-story');
+// //         if (element) {
+// //           const yOffset = -150; // Adjust as needed
+// //           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+// //           window.scrollTo({ top: y, behavior: 'smooth' });
+// //         }
+// //       }, 100);
+// //     }
+// //   }, []);
+// //   return (
+// //     <div className="bg-amber-50 dark:bg-gray-900 px-6 pt-32 pb-20 space-y-32">
+// //       {/* ======================= OUR STORY ======================= */}
+// //       <div id="our-story" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+// //         {/* LEFT: Overlapping Images */}
+// //         <div className="w-full relative h-96 md:h-[500px]">
+// //           {/* 1st Image - Burma Teak Cut Sizes */}
+// //           <div className="absolute top-0 left-0 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-10 rounded-xl shadow-lg overflow-hidden">
+// //             <img
+// //               src="/img/Burma/Burma Teak Cut Sizes.jpeg"
+// //               alt="Burma Teak Cut Sizes"
+// //               className="w-full h-full object-cover"
+// //             />
+// //           </div>
+
+// //           {/* 2nd Image - Hunsur Teak Logs */}
+// //           <div className="absolute top-1/4 right-0 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-20 rounded-xl shadow-lg overflow-hidden">
+// //             <img
+// //               src="/img/Hunsur/Hunsur Teak Logs.jpeg"
+// //               alt="Hunsur Teak Logs"
+// //               className="w-full h-full object-cover"
+// //             />
+// //           </div>
+
+// //           {/* 3rd Image - Matti Wood Logs */}
+// //           <div className="hidden md:block absolute bottom-0 left-1/4 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-30 rounded-xl shadow-lg overflow-hidden">
+// //             <img
+// //               src="/img/Matti/Matti Wood Logs.jpeg"
+// //               alt="Matti Wood Logs"
+// //               className="w-full h-full object-cover"
+// //             />
+// //           </div>
+
+// //         </div>
+
+
+// //         {/* RIGHT: Our Story Content */}
+// //         <div>
+// //           <h2 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-6">
+// //             Our Story
+// //           </h2>
+
+// //           <div className="inline-block bg-[#A0522D] text-white text-base md:text-lg font-semibold px-6 py-2 rounded-full mb-6 shadow-md">
+// //             Founded in 1982
+// //           </div>
+
+// //           <div className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed space-y-6">
+// //             <div ref={ref}>
+// //               <MOTION.div
+// //                 initial={{ opacity: 0, y: 20 }}
+// //                 animate={isInView ? { opacity: 1, y: 0 } : {}}
+// //                 transition={{ duration: 0.8, ease: 'easeOut' }}
+// //               >
+// //                 <p className="first-letter:text-5xl first-letter:float-left first-letter:font-bold first-letter:mr-2 first-letter:text-[#A0522D]">
+// //                   Sri Vishnu Maheshwara Timber (SVMT) stands as a proud sub-branch of Sri Venkateswara Saw Mill cum Depot, delivering premium hardwood timber of exceptional quality for over four decades.
+// //                 </p>
+// //               </MOTION.div>
+// //             </div>
+
+// //             <p>
+// //               As an independent family business rooted in the heart of India, we've established our presence across Andhra Pradesh and Karnataka, serving clients nationwide and beyond.
+// //             </p>
+
+// //             <p>
+// //               Our fully operational sawmill in{' '}
+// //               <span
+// //                 onClick={() => setShowMap(true)}
+// //                 className="text-[#A0522D]  hover:text-[#7B4B2A] cursor-pointer transition duration-200"
+// //               >
+// //                 Penukonda
+// //               </span>
+// //               , Andhra Pradesh serves as our central hub, allowing us to craft bespoke timber solutions and ensure prompt delivery throughout India.
+// //             </p>
+
+// //             <p>
+// //               What truly sets SVMT apart is our unwavering commitment to quality, our extensive range of timber products, and our personalized service approach.
+// //             </p>
+
+// //             <p>
+// //               Whether you're undertaking a major commercial project or a smaller personal endeavor, SVMT brings over 42 years of timber expertise to every piece we deliver.
+// //             </p>
+
+// //             {/* Decorative Quote */}
+// //             <div className="relative mt-10">
+// //               <div className="absolute top-[-20px] left-0 w-12 h-1 bg-[#A0522D] rounded-full"></div>
+// //               <div className="border-l-4 border-[#A0522D] pl-6 italic text-[#7B4B2A] font-medium text-xl">
+// //                 "Crafting quality timber with tradition, passion, and precision."
+// //               </div>
+// //             </div>
+// //           </div>
+// //         </div>
+// //       </div>
+
+// //       {/* ======================= MODAL ======================= */}
+// //       {showMap && (
+// //         <div className="fixed inset-0 bg-opacity-70 z-50 flex items-center justify-center px-4">
+// //           <div className="bg-white dark:bg-gray-900 rounded-xl p-4 max-w-3xl w-full relative shadow-2xl">
+// //             <button
+// //               onClick={() => setShowMap(false)}
+// //               className="absolute top-2 right-4 text-3xl font-bold text-gray-600 dark:text-gray-300 hover:text-red-500"
+// //             >
+// //               &times;
+// //             </button>
+// //             <iframe
+// //               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3853.6926374340475!2d77.5861484146652!3d14.082420991215034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb16e5b8de7c389%3A0x429893fb6e15606f!2sPenukonda%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1682592263695!5m2!1sen!2sin"
+// //               width="100%"
+// //               height="400"
+// //               style={{ border: 0 }}
+// //               allowFullScreen=""
+// //               loading="lazy"
+// //               className="rounded-lg"
+// //               referrerPolicy="no-referrer-when-downgrade"
+// //             ></iframe>
+// //           </div>
+// //         </div>
+// //       )}
+
+// //       {/* ======================= ACHIEVEMENTS ======================= */}
+// //       <div className="max-w-7xl mx-auto">
+// //         <h3 className="text-3xl md:text-4xl font-playfair font-extrabold text-[#7B4B2A] mb-10">
+// //           Our Achievements
+// //         </h3>
+
+// //         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+// //           {[
+// //             "Over 42 Years of Legacy",
+// //             "100+ Major Projects Delivered",
+// //             "ISO 9001:2015 Certified",
+// //             "Pan-India Logistics Network",
+// //             "Awarded Best Timber Depot 2023",
+// //             "Trusted by 200+ Businesses",
+// //           ].map((item, idx) => (
+// //             <MOTION.div
+// //               key={idx}
+// //               initial={{ opacity: 0, y: 30 }}
+// //               whileInView={{ opacity: 1, y: 0 }}
+// //               transition={{ duration: 0.5, delay: idx * 0.1 }}
+// //               viewport={{ once: true }}
+// //               className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md"
+// //             >
+// //               <p className="text-lg font-semibold text-[#A0522D]">{item}</p>
+// //             </MOTION.div>
+// //           ))}
+// //         </div>
+// //       </div>
+
+// //       {/* ======================= GALLERY ======================= */}
+// //       <div className="max-w-7xl mx-auto">
+// //         <h3 className="text-3xl md:text-4xl font-playfair font-extrabold text-[#7B4B2A] mb-10">
+// //           Gallery
+// //         </h3>
+
+// //         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+// //           {[...Array(6)].map((_, i) => (
+// //             <MOTION.div
+// //               key={i}
+// //               initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
+// //               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+// //               transition={{ duration: 0.5, delay: i * 0.1 }}
+// //               viewport={{ once: true }}
+// //               className="group relative rounded-[2.5rem] overflow-hidden shadow-xl transform transition duration-500 hover:scale-[1.02]"
+// //             >
+// //               {/* Glow Ring */}
+// //               <div className="absolute -inset-1 bg-gradient-to-tr from-[#7B4B2A] via-[#A0522D] to-[#E5B87E] rounded-[2.5rem] blur-md opacity-25 group-hover:opacity-40 transition duration-500"></div>
+
+// //               {/* Image Mask */}
+// //               <div className="relative z-10 rounded-[2.5rem] overflow-hidden">
+// //                 <img
+// //                   src="/img/sawmill.jpg"
+// //                   alt={`Gallery Image ${i + 1}`}
+// //                   className="w-full h-64 object-cover transition duration-500 group-hover:scale-110 group-hover:rotate-1"
+// //                 />
+// //               </div>
+// //             </MOTION.div>
+// //           ))}
+// //         </div>
+// //       </div>
+// //     </div>
+// //   );
+// // }
+
+
+// import React, { useState, useEffect } from 'react';
+// import { motion as MOTION } from 'framer-motion';
+
+// export default function Details() {
+//   const [showMap, setShowMap] = useState(false);
+
+//   useEffect(() => {
+//     const hash = window.location.hash;
+
+//     if (hash === '#our-story') {
+//       window.history.scrollRestoration = 'manual';
+//       window.scrollTo(0, 0);
+
+//       setTimeout(() => {
+//         const element = document.getElementById('our-story');
+//         if (element) {
+//           const yOffset = -150;
+//           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+//           window.scrollTo({ top: y, behavior: 'smooth' });
+//         }
+//       }, 100);
+//     }
+//   }, []);
+
+//   const fadeInUp = {
+//     hidden: { opacity: 0, y: 30 },
+//     visible: { opacity: 1, y: 0 }
+//   };
+
+//   const staggerContainer = {
+//     hidden: { opacity: 0 },
+//     visible: {
+//       opacity: 1,
+//       transition: { staggerChildren: 0.15 }
+//     }
+//   };
+
+//   return (
+//     <div className="bg-gradient-to-b from-[#FAF3E0] via-[#F5EBDF] to-[#F0E2CF] px-6 pt-32 pb-20 space-y-32">
+//       {/* ======================= OUR STORY ======================= */}
+//       <MOTION.div 
+//         id="our-story" 
+//         className="max-w-7xl mx-auto"
+//         initial="hidden"
+//         whileInView="visible"
+//         viewport={{ once: true }}
+//         variants={staggerContainer}
+//       >
+//         <MOTION.div variants={fadeInUp} className="text-center mb-16">
+//           <h2 className="text-4xl md:text-6xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] via-[#A0522D] to-[#C97F4A] text-transparent bg-clip-text mb-4">
+//             Our Story
+//           </h2>
+//           <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full"></div>
+//         </MOTION.div>
+
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+//           {/* LEFT: Overlapping Images with Enhanced Effects */}
+//           <MOTION.div 
+//             variants={fadeInUp}
+//             className="w-full relative h-[500px] md:h-[600px]"
+//           >
+//             {/* Decorative background blur */}
+//             <div className="absolute inset-0 bg-gradient-to-br from-[#A0522D]/10 to-[#7B4B2A]/10 rounded-3xl blur-3xl"></div>
+
+//             {/* 1st Image */}
+//             <MOTION.div 
+//               initial={{ opacity: 0, x: -50, rotate: -5 }}
+//               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+//               transition={{ duration: 0.8, delay: 0.2 }}
+//               viewport={{ once: true }}
+//               className="absolute top-0 left-0 w-64 h-64 md:w-80 md:h-80 z-10 group"
+//             >
+//               <div className="absolute -inset-2 bg-gradient-to-br from-[#A0522D] to-[#7B4B2A] rounded-2xl opacity-20 group-hover:opacity-40 transition duration-300 blur-xl"></div>
+//               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 transform group-hover:scale-105 transition-transform duration-500">
+//                 <img
+//                   src="/img/Burma/Burma Teak Cut Sizes.jpeg"
+//                   alt="Burma Teak Cut Sizes"
+//                   className="w-full h-full object-cover"
+//                 />
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//               </div>
+//             </MOTION.div>
+
+//             {/* 2nd Image */}
+//             <MOTION.div 
+//               initial={{ opacity: 0, x: 50, rotate: 5 }}
+//               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+//               transition={{ duration: 0.8, delay: 0.4 }}
+//               viewport={{ once: true }}
+//               className="absolute top-1/4 right-0 w-64 h-64 md:w-80 md:h-80 z-20 group"
+//             >
+//               <div className="absolute -inset-2 bg-gradient-to-br from-[#C97F4A] to-[#A0522D] rounded-2xl opacity-20 group-hover:opacity-40 transition duration-300 blur-xl"></div>
+//               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 transform group-hover:scale-105 transition-transform duration-500">
+//                 <img
+//                   src="/img/Hunsur/Hunsur Teak Logs.jpeg"
+//                   alt="Hunsur Teak Logs"
+//                   className="w-full h-full object-cover"
+//                 />
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//               </div>
+//             </MOTION.div>
+
+//             {/* 3rd Image */}
+//             <MOTION.div 
+//               initial={{ opacity: 0, y: 50, rotate: -3 }}
+//               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+//               transition={{ duration: 0.8, delay: 0.6 }}
+//               viewport={{ once: true }}
+//               className="hidden md:block absolute bottom-0 left-1/4 w-64 h-64 md:w-80 md:h-80 z-30 group"
+//             >
+//               <div className="absolute -inset-2 bg-gradient-to-br from-[#E5B87E] to-[#C97F4A] rounded-2xl opacity-20 group-hover:opacity-40 transition duration-300 blur-xl"></div>
+//               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 transform group-hover:scale-105 transition-transform duration-500">
+//                 <img
+//                   src="/img/Matti/Matti Wood Logs.jpeg"
+//                   alt="Matti Wood Logs"
+//                   className="w-full h-full object-cover"
+//                 />
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//               </div>
+//             </MOTION.div>
+//           </MOTION.div>
+
+//           {/* RIGHT: Our Story Content */}
+//           <MOTION.div variants={fadeInUp} className="space-y-6">
+//             <MOTION.div 
+//               variants={fadeInUp}
+//               className="inline-flex items-center gap-3 bg-gradient-to-r from-[#A0522D] to-[#8B4513] text-white text-base md:text-lg font-bold px-8 py-3 rounded-full shadow-lg"
+//             >
+//               <span className="text-2xl">🏆</span>
+//               <span>Founded in 1982</span>
+//             </MOTION.div>
+
+//             <MOTION.div 
+//               variants={fadeInUp}
+//               className="text-gray-800 dark:text-gray-200 text-base md:text-lg leading-relaxed space-y-5"
+//             >
+//               <p className="first-letter:text-6xl first-letter:float-left first-letter:font-bold first-letter:mr-3 first-letter:leading-none first-letter:text-[#A0522D] first-letter:font-playfair">
+//                 Sri Vishnu Maheshwara Timber (SVMT) stands as a proud sub-branch of Sri Venkateswara Saw Mill cum Depot, delivering premium hardwood timber of exceptional quality for over four decades.
+//               </p>
+
+//               <p className="pl-4 border-l-4 border-[#A0522D]/30">
+//                 As an independent family business rooted in the heart of India, we've established our presence across Andhra Pradesh and Karnataka, serving clients nationwide and beyond.
+//               </p>
+
+//               <p>
+//                 Our fully operational sawmill in{' '}
+//                 <span
+//                   onClick={() => setShowMap(true)}
+//                   className="inline-flex items-center gap-1 text-[#A0522D] hover:text-[#7B4B2A] cursor-pointer font-semibold transition duration-200 underline decoration-wavy decoration-[#A0522D]/30 hover:decoration-[#A0522D]"
+//                 >
+//                   📍 Penukonda
+//                 </span>
+//                 , Andhra Pradesh serves as our central hub, allowing us to craft bespoke timber solutions and ensure prompt delivery throughout India.
+//               </p>
+
+//               <p className="bg-gradient-to-r from-[#F5EBDF] to-transparent p-4 rounded-lg border-l-4 border-[#A0522D]">
+//                 What truly sets SVMT apart is our unwavering commitment to quality, our extensive range of timber products, and our personalized service approach.
+//               </p>
+
+//               <p>
+//                 Whether you're undertaking a major commercial project or a smaller personal endeavor, SVMT brings over 42 years of timber expertise to every piece we deliver.
+//               </p>
+
+//               {/* Decorative Quote */}
+//               <MOTION.div 
+//                 variants={fadeInUp}
+//                 className="relative mt-10 p-6 bg-gradient-to-br from-[#A0522D]/10 to-transparent rounded-2xl"
+//               >
+//                 <div className="absolute -top-6 -left-4 text-6xl text-[#A0522D]/20 font-serif">"</div>
+//                 <div className="text-[#7B4B2A] font-medium text-xl md:text-2xl italic font-playfair">
+//                   Crafting quality timber with tradition, passion, and precision.
+//                 </div>
+//                 <div className="absolute -bottom-6 -right-4 text-6xl text-[#A0522D]/20 font-serif">"</div>
+//               </MOTION.div>
+//             </MOTION.div>
+//           </MOTION.div>
+//         </div>
+//       </MOTION.div>
+
+//       {/* ======================= MODAL ======================= */}
+//       {showMap && (
+//         <MOTION.div 
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           exit={{ opacity: 0 }}
+//           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4"
+//           onClick={() => setShowMap(false)}
+//         >
+//           <MOTION.div 
+//             initial={{ scale: 0.9, y: 20 }}
+//             animate={{ scale: 1, y: 0 }}
+//             className="bg-white dark:bg-gray-900 rounded-2xl p-6 max-w-4xl w-full relative shadow-2xl"
+//             onClick={(e) => e.stopPropagation()}
+//           >
+//             <button
+//               onClick={() => setShowMap(false)}
+//               className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-[#A0522D] to-[#7B4B2A] text-white text-2xl font-bold hover:scale-110 transition-transform shadow-xl flex items-center justify-center"
+//             >
+//               ×
+//             </button>
+//             <h3 className="text-2xl font-playfair font-bold text-[#7B4B2A] mb-4 flex items-center gap-2">
+//               <span>📍</span> Our Location - Penukonda
+//             </h3>
+//             <iframe
+//               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3853.6926374340475!2d77.5861484146652!3d14.082420991215034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb16e5b8de7c389%3A0x429893fb6e15606f!2sPenukonda%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1682592263695!5m2!1sen!2sin"
+//               width="100%"
+//               height="450"
+//               style={{ border: 0 }}
+//               allowFullScreen=""
+//               loading="lazy"
+//               className="rounded-xl shadow-inner"
+//               referrerPolicy="no-referrer-when-downgrade"
+//             ></iframe>
+//           </MOTION.div>
+//         </MOTION.div>
+//       )}
+
+//       {/* ======================= ACHIEVEMENTS ======================= */}
+//       <MOTION.div 
+//         className="max-w-7xl mx-auto"
+//         initial="hidden"
+//         whileInView="visible"
+//         viewport={{ once: true }}
+//         variants={staggerContainer}
+//       >
+//         <MOTION.div variants={fadeInUp} className="text-center mb-16">
+//           <h3 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-4">
+//             Our Achievements
+//           </h3>
+//           <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full"></div>
+//         </MOTION.div>
+
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//           {[
+//             { text: "Over 42 Years of Legacy", icon: "🏛️" },
+//             { text: "100+ Major Projects Delivered", icon: "🏗️" },
+//             { text: "ISO 9001:2015 Certified", icon: "🏅" },
+//             { text: "Pan-India Logistics Network", icon: "🚚" },
+//             { text: "Awarded Best Timber Depot 2023", icon: "🏆" },
+//             { text: "Trusted by 200+ Businesses", icon: "🤝" },
+//           ].map((item, idx) => (
+//             <MOTION.div
+//               key={idx}
+//               variants={fadeInUp}
+//               whileHover={{ y: -8, scale: 1.02 }}
+//               whileTap={{ scale: 0.98 }}
+//               className="group relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-[#E5D5C8]"
+//             >
+//               {/* Decorative corner */}
+//               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#A0522D]/20 to-transparent rounded-bl-3xl"></div>
+              
+//               <div className="flex items-start gap-4">
+//                 <MOTION.div 
+//                   className="text-4xl flex-shrink-0"
+//                   animate={{ 
+//                     rotate: [0, 10, -10, 0],
+//                     scale: [1, 1.1, 1]
+//                   }}
+//                   transition={{ 
+//                     duration: 3,
+//                     delay: idx * 0.2,
+//                     repeat: Infinity,
+//                     repeatDelay: 2
+//                   }}
+//                 >
+//                   {item.icon}
+//                 </MOTION.div>
+//                 <div>
+//                   <p className="text-lg font-bold text-[#4A3124] dark:text-[#E5D5C8] group-hover:text-[#A0522D] transition-colors">
+//                     {item.text}
+//                   </p>
+//                 </div>
+//               </div>
+
+//               {/* Animated bottom line */}
+//               <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#A0522D] to-[#E5B87E] group-hover:w-full transition-all duration-500"></div>
+//             </MOTION.div>
+//           ))}
+//         </div>
+//       </MOTION.div>
+
+//       {/* ======================= GALLERY ======================= */}
+//       <MOTION.div 
+//         className="max-w-7xl mx-auto"
+//         initial="hidden"
+//         whileInView="visible"
+//         viewport={{ once: true }}
+//         variants={staggerContainer}
+//       >
+//         <MOTION.div variants={fadeInUp} className="text-center mb-16">
+//           <h3 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-4">
+//             Gallery
+//           </h3>
+//           <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full mb-4"></div>
+//           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+//             Explore our craftsmanship through these stunning visuals of our timber work and facilities
+//           </p>
+//         </MOTION.div>
+
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+//           {[...Array(6)].map((_, i) => (
+//             <MOTION.div
+//               key={i}
+//               variants={fadeInUp}
+//               whileHover={{ y: -10, scale: 1.03 }}
+//               whileTap={{ scale: 0.98 }}
+//               className="group relative rounded-3xl overflow-hidden shadow-xl transform transition-all duration-500"
+//             >
+//               {/* Animated glow ring */}
+//               <div className="absolute -inset-1 bg-gradient-to-tr from-[#7B4B2A] via-[#A0522D] to-[#E5B87E] rounded-3xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
+
+//               {/* Image container */}
+//               <div className="relative z-10 rounded-3xl overflow-hidden border-4 border-white/30">
+//                 <img
+//                   src="/img/sawmill.jpg"
+//                   alt={`Gallery Image ${i + 1}`}
+//                   className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
+//                 />
+                
+//                 {/* Gradient overlay */}
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+//                 {/* Number badge */}
+//                 <MOTION.div 
+//                   className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center font-bold text-[#A0522D] shadow-lg"
+//                   whileHover={{ rotate: 360, scale: 1.2 }}
+//                   transition={{ duration: 0.5 }}
+//                 >
+//                   {i + 1}
+//                 </MOTION.div>
+
+//                 {/* Image title overlay */}
+//                 <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+//                   <p className="text-white font-semibold text-lg">Gallery Image {i + 1}</p>
+//                   <p className="text-white/80 text-sm">Our Workshop</p>
+//                 </div>
+//               </div>
+//             </MOTION.div>
+//           ))}
+//         </div>
+//       </MOTION.div>
+//     </div>
+//   );
+// }
+
+import React, { useState, useEffect } from 'react';
+import { motion as MOTION } from 'framer-motion';
 
 export default function Details() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
   const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash;
 
     if (hash === '#our-story') {
-      // Prevent default scroll behavior
       window.history.scrollRestoration = 'manual';
-
-      // Immediately set scroll position to prevent flashing of other content
       window.scrollTo(0, 0);
 
-      // Then scroll to the correct position after a short delay
       setTimeout(() => {
         const element = document.getElementById('our-story');
         if (element) {
-          const yOffset = -150; // Adjust as needed
+          const yOffset = -150;
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 100);
     }
   }, []);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
   return (
-    <div className="bg-amber-50 dark:bg-gray-900 px-6 pt-32 pb-20 space-y-32">
+    <div className="bg-gradient-to-b from-[#FAF3E0] via-[#F5EBDF] to-[#F0E2CF] px-6 pt-32 pb-20 space-y-32">
       {/* ======================= OUR STORY ======================= */}
-      <div id="our-story" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* LEFT: Overlapping Images */}
-        <div className="w-full relative h-96 md:h-[500px]">
-          {/* 1st Image - Burma Teak Cut Sizes */}
-          <div className="absolute top-0 left-0 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-10 rounded-xl shadow-lg overflow-hidden">
-            <img
-              src="/img/Burma/Burma Teak Cut Sizes.jpeg"
-              alt="Burma Teak Cut Sizes"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* 2nd Image - Hunsur Teak Logs */}
-          <div className="absolute top-1/4 right-0 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-20 rounded-xl shadow-lg overflow-hidden">
-            <img
-              src="/img/Hunsur/Hunsur Teak Logs.jpeg"
-              alt="Hunsur Teak Logs"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* 3rd Image - Matti Wood Logs */}
-          <div className="hidden md:block absolute bottom-0 left-1/4 w-64 h-64 md:w-80 md:h-80 border border-gray-300 z-30 rounded-xl shadow-lg overflow-hidden">
-            <img
-              src="/img/Matti/Matti Wood Logs.jpeg"
-              alt="Matti Wood Logs"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-        </div>
-
-
-        {/* RIGHT: Our Story Content */}
-        <div>
-          <h2 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-6">
+      <MOTION.div 
+        id="our-story" 
+        className="max-w-7xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <MOTION.div variants={fadeInUp} className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] via-[#A0522D] to-[#C97F4A] text-transparent bg-clip-text mb-4">
             Our Story
           </h2>
+          <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full"></div>
+        </MOTION.div>
 
-          <div className="inline-block bg-[#A0522D] text-white text-base md:text-lg font-semibold px-6 py-2 rounded-full mb-6 shadow-md">
-            Founded in 1982
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          {/* LEFT: Overlapping Images with Enhanced Effects */}
+          <MOTION.div 
+            variants={fadeInUp}
+            className="w-full relative h-[500px] md:h-[600px]"
+          >
+            {/* Decorative background blur */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#A0522D]/10 to-[#7B4B2A]/10 rounded-3xl blur-3xl"></div>
 
-          <div className="text-gray-800 dark:text-gray-200 text-lg leading-relaxed space-y-6">
-            <div ref={ref}>
-              <MOTION.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-              >
-                <p className="first-letter:text-5xl first-letter:float-left first-letter:font-bold first-letter:mr-2 first-letter:text-[#A0522D]">
-                  Sri Vishnu Maheshwara Timber (SVMT) stands as a proud sub-branch of Sri Venkateswara Saw Mill cum Depot, delivering premium hardwood timber of exceptional quality for over four decades.
-                </p>
-              </MOTION.div>
-            </div>
-
-            <p>
-              As an independent family business rooted in the heart of India, we've established our presence across Andhra Pradesh and Karnataka, serving clients nationwide and beyond.
-            </p>
-
-            <p>
-              Our fully operational sawmill in{' '}
-              <span
-                onClick={() => setShowMap(true)}
-                className="text-[#A0522D]  hover:text-[#7B4B2A] cursor-pointer transition duration-200"
-              >
-                Penukonda
-              </span>
-              , Andhra Pradesh serves as our central hub, allowing us to craft bespoke timber solutions and ensure prompt delivery throughout India.
-            </p>
-
-            <p>
-              What truly sets SVMT apart is our unwavering commitment to quality, our extensive range of timber products, and our personalized service approach.
-            </p>
-
-            <p>
-              Whether you're undertaking a major commercial project or a smaller personal endeavor, SVMT brings over 42 years of timber expertise to every piece we deliver.
-            </p>
-
-            {/* Decorative Quote */}
-            <div className="relative mt-10">
-              <div className="absolute top-[-20px] left-0 w-12 h-1 bg-[#A0522D] rounded-full"></div>
-              <div className="border-l-4 border-[#A0522D] pl-6 italic text-[#7B4B2A] font-medium text-xl">
-                "Crafting quality timber with tradition, passion, and precision."
+            {/* 1st Image */}
+            <MOTION.div 
+              initial={{ opacity: 0, x: -50, rotate: -5 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="absolute top-0 left-0 w-64 h-64 md:w-80 md:h-80 z-10 group"
+            >
+              <div className="absolute -inset-2 bg-gradient-to-br from-[#A0522D] to-[#7B4B2A] rounded-2xl opacity-20 group-hover:opacity-40 transition duration-300 blur-xl"></div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 transform group-hover:scale-105 transition-transform duration-500">
+                <img
+                  src="/img/Burma/Burma Teak Cut Sizes.jpeg"
+                  alt="Burma Teak Cut Sizes"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-            </div>
-          </div>
+            </MOTION.div>
+
+            {/* 2nd Image */}
+            <MOTION.div 
+              initial={{ opacity: 0, x: 50, rotate: 5 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="absolute top-1/4 right-0 w-64 h-64 md:w-80 md:h-80 z-20 group"
+            >
+              <div className="absolute -inset-2 bg-gradient-to-br from-[#C97F4A] to-[#A0522D] rounded-2xl opacity-20 group-hover:opacity-40 transition duration-300 blur-xl"></div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 transform group-hover:scale-105 transition-transform duration-500">
+                <img
+                  src="/img/Hunsur/Hunsur Teak Logs.jpeg"
+                  alt="Hunsur Teak Logs"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </MOTION.div>
+
+            {/* 3rd Image */}
+            <MOTION.div 
+              initial={{ opacity: 0, y: 50, rotate: -3 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
+              className="hidden md:block absolute bottom-0 left-1/4 w-64 h-64 md:w-80 md:h-80 z-30 group"
+            >
+              <div className="absolute -inset-2 bg-gradient-to-br from-[#E5B87E] to-[#C97F4A] rounded-2xl opacity-20 group-hover:opacity-40 transition duration-300 blur-xl"></div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/50 transform group-hover:scale-105 transition-transform duration-500">
+                <img
+                  src="/img/Matti/Matti Wood Logs.jpeg"
+                  alt="Matti Wood Logs"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </MOTION.div>
+          </MOTION.div>
+
+          {/* RIGHT: Our Story Content */}
+          <MOTION.div variants={fadeInUp} className="space-y-6">
+            <MOTION.div 
+              variants={fadeInUp}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#A0522D] to-[#8B4513] text-white text-base md:text-lg font-bold px-8 py-3 rounded-full shadow-lg"
+            >
+              <span className="text-2xl">🏆</span>
+              <span>Founded in 1982</span>
+            </MOTION.div>
+
+            <MOTION.div 
+  variants={fadeInUp}
+  className="text-gray-800 text-base md:text-lg leading-relaxed space-y-5"
+>
+
+              <p className="first-letter:text-6xl first-letter:float-left first-letter:font-bold first-letter:mr-3 first-letter:leading-none first-letter:text-[#A0522D] first-letter:font-playfair">
+                Sri Vishnu Maheshwara Timber (SVMT) stands as a proud sub-branch of Sri Venkateswara Saw Mill cum Depot, delivering premium hardwood timber of exceptional quality for over four decades.
+              </p>
+
+              <p className="pl-4 border-l-4 border-[#A0522D]/30">
+                As an independent family business rooted in the heart of India, we've established our presence across Andhra Pradesh and Karnataka, serving clients nationwide and beyond.
+              </p>
+
+              <p>
+                Our fully operational sawmill in{' '}
+                <span
+                  onClick={() => setShowMap(true)}
+                  className="inline-flex items-center gap-1 text-[#A0522D] hover:text-[#7B4B2A] cursor-pointer font-semibold transition duration-200 underline decoration-wavy decoration-[#A0522D]/30 hover:decoration-[#A0522D]"
+                >
+                  📍 Penukonda
+                </span>
+                , Andhra Pradesh serves as our central hub, allowing us to craft bespoke timber solutions and ensure prompt delivery throughout India.
+              </p>
+
+              <p className="bg-gradient-to-r from-[#F5EBDF] to-transparent p-4 rounded-lg border-l-4 border-[#A0522D]">
+                What truly sets SVMT apart is our unwavering commitment to quality, our extensive range of timber products, and our personalized service approach.
+              </p>
+
+              <p>
+                Whether you're undertaking a major commercial project or a smaller personal endeavor, SVMT brings over 42 years of timber expertise to every piece we deliver.
+              </p>
+
+              {/* Decorative Quote */}
+              <MOTION.div 
+                variants={fadeInUp}
+                className="relative mt-10 p-6 bg-gradient-to-br from-[#A0522D]/10 to-transparent rounded-2xl"
+              >
+                <div className="absolute -top-6 -left-4 text-6xl text-[#A0522D]/20 font-serif">"</div>
+                <div className="text-[#7B4B2A] font-medium text-xl md:text-2xl italic font-playfair">
+                  Crafting quality timber with tradition, passion, and precision.
+                </div>
+                <div className="absolute -bottom-6 -right-4 text-6xl text-[#A0522D]/20 font-serif">"</div>
+              </MOTION.div>
+            </MOTION.div>
+          </MOTION.div>
         </div>
-      </div>
+      </MOTION.div>
 
       {/* ======================= MODAL ======================= */}
       {showMap && (
-        <div className="fixed inset-0 bg-opacity-70 z-50 flex items-center justify-center px-4">
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-4 max-w-3xl w-full relative shadow-2xl">
+        <MOTION.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4"
+          onClick={() => setShowMap(false)}
+        >
+          <MOTION.div 
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            className="bg-white rounded-2xl p-6 max-w-4xl w-full relative shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => setShowMap(false)}
-              className="absolute top-2 right-4 text-3xl font-bold text-gray-600 dark:text-gray-300 hover:text-red-500"
+              className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-[#A0522D] to-[#7B4B2A] text-white text-2xl font-bold hover:scale-110 transition-transform shadow-xl flex items-center justify-center"
             >
-              &times;
+              ×
             </button>
+            <h3 className="text-2xl font-playfair font-bold text-[#7B4B2A] mb-4 flex items-center gap-2">
+              <span>📍</span> Our Location - Penukonda
+            </h3>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3853.6926374340475!2d77.5861484146652!3d14.082420991215034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb16e5b8de7c389%3A0x429893fb6e15606f!2sPenukonda%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1682592263695!5m2!1sen!2sin"
               width="100%"
-              height="400"
+              height="450"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
-              className="rounded-lg"
+              className="rounded-xl shadow-inner"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div>
-        </div>
+          </MOTION.div>
+        </MOTION.div>
       )}
 
-      {/* ======================= ACHIEVEMENTS ======================= */}
-      <div className="max-w-7xl mx-auto">
-        <h3 className="text-3xl md:text-4xl font-playfair font-extrabold text-[#7B4B2A] mb-10">
-          Our Achievements
-        </h3>
+      {/* ======================= WHY CHOOSE US ======================= */}
+      <MOTION.div 
+        className="max-w-7xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <MOTION.div variants={fadeInUp} className="text-center mb-16">
+          <h3 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-4">
+            Why Choose Us
+          </h3>
+          <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full"></div>
+        </MOTION.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            "Over 42 Years of Legacy",
-            "100+ Major Projects Delivered",
-            "ISO 9001:2015 Certified",
-            "Pan-India Logistics Network",
-            "Awarded Best Timber Depot 2023",
-            "Trusted by 200+ Businesses",
+            { text: "Over 42 Years of Experience", icon: "🏛️" },
+            { text: "Premium Quality Timber", icon: "🌲" },
+            { text: "Wide Range of Products", icon: "📦" },
+            { text: "Nationwide Delivery", icon: "🚚" },
+            { text: "Expert Craftsmanship", icon: "🛠️" },
+            { text: "Trusted Family Business", icon: "🤝" },
           ].map((item, idx) => (
             <MOTION.div
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md"
+              variants={fadeInUp}
+              whileHover={{ y: -8, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-[#E5D5C8]"
             >
-              <p className="text-lg font-semibold text-[#A0522D]">{item}</p>
+              {/* Decorative corner */}
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#A0522D]/20 to-transparent rounded-bl-3xl"></div>
+              
+              <div className="flex items-start gap-4">
+                <MOTION.div 
+                  className="text-4xl flex-shrink-0"
+                  animate={{ 
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    delay: idx * 0.2,
+                    repeat: Infinity,
+                    repeatDelay: 2
+                  }}
+                >
+                  {item.icon}
+                </MOTION.div>
+                <div>
+                  <p className="text-lg font-bold text-[#4A3124] group-hover:text-[#A0522D] transition-colors">
+                    {item.text}
+                  </p>
+                </div>
+              </div>
+
+              {/* Animated bottom line */}
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#A0522D] to-[#E5B87E] group-hover:w-full transition-all duration-500"></div>
             </MOTION.div>
           ))}
         </div>
-      </div>
+      </MOTION.div>
 
       {/* ======================= GALLERY ======================= */}
-      <div className="max-w-7xl mx-auto">
-        <h3 className="text-3xl md:text-4xl font-playfair font-extrabold text-[#7B4B2A] mb-10">
-          Gallery
-        </h3>
+      <MOTION.div 
+        className="max-w-7xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <MOTION.div variants={fadeInUp} className="text-center mb-16">
+          <h3 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-4">
+            Gallery
+          </h3>
+          <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full mb-4"></div>
+          <p className="text-gray-600  max-w-2xl mx-auto">
+            Explore our craftsmanship through these stunning visuals of our timber work and facilities
+          </p>
+        </MOTION.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {[...Array(6)].map((_, i) => (
             <MOTION.div
               key={i}
-              initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative rounded-[2.5rem] overflow-hidden shadow-xl transform transition duration-500 hover:scale-[1.02]"
+              variants={fadeInUp}
+              whileHover={{ y: -10, scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative rounded-3xl overflow-hidden shadow-xl transform transition-all duration-500"
             >
-              {/* Glow Ring */}
-              <div className="absolute -inset-1 bg-gradient-to-tr from-[#7B4B2A] via-[#A0522D] to-[#E5B87E] rounded-[2.5rem] blur-md opacity-25 group-hover:opacity-40 transition duration-500"></div>
+              {/* Animated glow ring */}
+              <div className="absolute -inset-1 bg-gradient-to-tr from-[#7B4B2A] via-[#A0522D] to-[#E5B87E] rounded-3xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
 
-              {/* Image Mask */}
-              <div className="relative z-10 rounded-[2.5rem] overflow-hidden">
+              {/* Image container */}
+              <div className="relative z-10 rounded-3xl overflow-hidden border-4 border-white/30">
                 <img
                   src="/img/sawmill.jpg"
                   alt={`Gallery Image ${i + 1}`}
-                  className="w-full h-64 object-cover transition duration-500 group-hover:scale-110 group-hover:rotate-1"
+                  className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Number badge */}
+                <MOTION.div 
+                  className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center font-bold text-[#A0522D] shadow-lg"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {i + 1}
+                </MOTION.div>
+
+                {/* Image title overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-white font-semibold text-lg">Gallery Image {i + 1}</p>
+                  <p className="text-white/80 text-sm">Our Workshop</p>
+                </div>
               </div>
             </MOTION.div>
           ))}
         </div>
-      </div>
+      </MOTION.div>
     </div>
   );
 }
