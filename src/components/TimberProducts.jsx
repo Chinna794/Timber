@@ -257,7 +257,6 @@ const Icons = {
   ),
 };
 
-
 export default function TimberProducts() {
   const [mainCategory, setMainCategory] = useState("Teak");
   const [subCategory, setSubCategory] = useState("Indian");
@@ -350,8 +349,6 @@ export default function TimberProducts() {
         </p>
       </MOTION.div>
 
-
-
       {/* Category Navigation */}
       <div className="mb-12 max-w-5xl mx-auto">
         <div
@@ -363,10 +360,11 @@ export default function TimberProducts() {
               <button
                 key={category}
                 onClick={() => updateMainCategory(category)}
-                className={`flex-1 text-center py-5 px-6 transition-all duration-300 flex items-center justify-center gap-2 ${mainCategory === category
-                  ? `bg-gradient-to-r ${luxury.tabActive} border-b-2 border-[#674C28] dark:border-[#FFD700] font-medium`
-                  : `${luxury.tabInactive} hover:bg-[#F0E5CF]/40 dark:hover:bg-[#3B2C1A]/40`
-                  }`}
+                className={`flex-1 text-center py-5 px-6 transition-all duration-300 flex items-center justify-center gap-2 ${
+                  mainCategory === category
+                    ? `bg-gradient-to-r ${luxury.tabActive} border-b-2 border-[#674C28] dark:border-[#FFD700] font-medium`
+                    : `${luxury.tabInactive} hover:bg-[#F0E5CF]/40 dark:hover:bg-[#3B2C1A]/40`
+                }`}
               >
                 <span
                   className={
@@ -405,17 +403,19 @@ export default function TimberProducts() {
                   <button
                     key={sub}
                     onClick={() => updateSubCategory(sub)}
-                    className={`px-5 py-3 rounded-lg text-sm transition-all flex justify-between items-center ${subCategory === sub
-                      ? "bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] text-black shadow-md"
-                      : "bg-white dark:bg-[#1C1C1C] text-[#5A4A30] dark:text-[#EADCA6] border border-[#CBB27D] dark:border-[#7F6E3C] hover:border-[#BFA77A] dark:hover:border-[#DAA520]"
-                      }`}
+                    className={`px-5 py-3 rounded-lg text-sm transition-all flex justify-between items-center ${
+                      subCategory === sub
+                        ? "bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] text-black shadow-md"
+                        : "bg-white dark:bg-[#1C1C1C] text-[#5A4A30] dark:text-[#EADCA6] border border-[#CBB27D] dark:border-[#7F6E3C] hover:border-[#BFA77A] dark:hover:border-[#DAA520]"
+                    }`}
                   >
                     <span>{sub}</span>
                     <span
-                      className={`text-xs rounded-full px-2 py-0.5 ${subCategory === sub
-                        ? "bg-white/20 text-black"
-                        : "bg-[#F0E5CF] dark:bg-[#3B2C1A] text-[#674C28] dark:text-[#EADCA6]"
-                        }`}
+                      className={`text-xs rounded-full px-2 py-0.5 ${
+                        subCategory === sub
+                          ? "bg-white/20 text-black"
+                          : "bg-[#F0E5CF] dark:bg-[#3B2C1A] text-[#674C28] dark:text-[#EADCA6]"
+                      }`}
                     >
                       {
                         productHierarchy[mainCategory][sub].filter(
@@ -446,16 +446,18 @@ export default function TimberProducts() {
                       whileTap={{ scale: 0.98 }}
                       key={product}
                       onClick={() => setFinalProduct(product)}
-                      className={`rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${finalProduct === product
-                        ? "ring-2 ring-[#BFA77A] dark:ring-[#FFD700] shadow-lg"
-                        : "shadow-sm border border-[#EADCA6] dark:border-[#5F4E2A] hover:shadow-md"
-                        }`}
+                      className={`rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
+                        finalProduct === product
+                          ? "ring-2 ring-[#BFA77A] dark:ring-[#FFD700] shadow-lg"
+                          : "shadow-sm border border-[#EADCA6] dark:border-[#5F4E2A] hover:shadow-md"
+                      }`}
                     >
                       <div className="h-24 flex items-center justify-between bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] p-4">
                         <h3 className="text-black font-medium">{product}</h3>
                         <span
-                          className={`text-xs bg-white/20 text-black rounded-full px-2 py-1 ${finalProduct === product ? "bg-white/30" : ""
-                            }`}
+                          className={`text-xs bg-white/20 text-black rounded-full px-2 py-1 ${
+                            finalProduct === product ? "bg-white/30" : ""
+                          }`}
                         >
                           {finalProduct === product ? "Selected" : "Select"}
                         </span>
@@ -507,17 +509,15 @@ export default function TimberProducts() {
         <div
           className="relative -mx-4 md:-mx-0 rounded-2xl overflow-hidden bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: `url('${currentData.images?.[activeImageIndex]
-              ? currentData.images[activeImageIndex].startsWith('/')
-                ? currentData.images[activeImageIndex]
-                : '/' + currentData.images[activeImageIndex]
-              : '/img/bg/about-bg.jpeg'
-              }')`,
+            backgroundImage: `url('${
+              currentData.images?.[activeImageIndex]
+                ? currentData.images[activeImageIndex].startsWith("/")
+                  ? currentData.images[activeImageIndex]
+                  : "/" + currentData.images[activeImageIndex]
+                : "/img/bg/about-bg.jpeg"
+            }')`,
           }}
         >
-
-
-
           {/* Background overlay for better contrast */}
           <div className="absolute inset-0 bg-black/30 dark:bg-black/50 pointer-events-none" />
 
@@ -570,7 +570,7 @@ export default function TimberProducts() {
                         {/* Main Image */}
                         <div
                           className="relative rounded-xl overflow-hidden aspect-video bg-[#F0E5CF] dark:bg-[#3B2C1A] shadow-inner mb-4 cursor-pointer"
-                          onClick={() => setModalType('image')} // Open modal on click
+                          onClick={() => setModalType("image")} // Open modal on click
                         >
                           <img
                             src={currentData.images[activeImageIndex]}
@@ -585,10 +585,11 @@ export default function TimberProducts() {
                             <button
                               key={i}
                               onClick={() => setActiveImageIndex(i)}
-                              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden transition-all ${i === activeImageIndex
-                                ? "ring-2 ring-[#BFA77A] dark:ring-[#FFD700] opacity-100"
-                                : "opacity-70 hover:opacity-100"
-                                }`}
+                              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden transition-all ${
+                                i === activeImageIndex
+                                  ? "ring-2 ring-[#BFA77A] dark:ring-[#FFD700] opacity-100"
+                                  : "opacity-70 hover:opacity-100"
+                              }`}
                             >
                               <img
                                 src={img}
@@ -600,7 +601,7 @@ export default function TimberProducts() {
                         </div>
 
                         {/* Modal / Popup */}
-                        {modalType === 'image' && (
+                        {modalType === "image" && (
                           <div
                             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
                             onClick={() => setModalType(null)}
@@ -628,7 +629,6 @@ export default function TimberProducts() {
                             </div>
                           </div>
                         )}
-
                       </>
                     ) : (
                       <div className="rounded-xl overflow-hidden aspect-video bg-[#F0E5CF] dark:bg-[#3B2C1A] shadow-inner flex items-center justify-center">
@@ -640,7 +640,6 @@ export default function TimberProducts() {
                       </div>
                     )}
                   </div>
-
 
                   {/* Product Info */}
                   <MOTION.div
@@ -656,7 +655,9 @@ export default function TimberProducts() {
                       <h4 className={`${luxury.textLabel} font-medium mb-3`}>
                         Description
                       </h4>
-                      <p className={`${luxury.textMain} leading-relaxed text-sm`}>
+                      <p
+                        className={`${luxury.textMain} leading-relaxed text-sm`}
+                      >
                         {currentData.description}
                       </p>
                     </MOTION.div>
@@ -731,7 +732,9 @@ export default function TimberProducts() {
                             const contactSection =
                               document.getElementById("contact");
                             if (contactSection) {
-                              contactSection.scrollIntoView({ behavior: "smooth" });
+                              contactSection.scrollIntoView({
+                                behavior: "smooth",
+                              });
                             }
                           }}
                           className="w-full py-3 px-6 bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] text-black rounded-lg hover:from-[#A89069] hover:to-[#C7B58B] dark:hover:from-[#EBC700] dark:hover:to-[#C99519] transition-colors text-sm font-medium shadow-md flex items-center justify-center gap-2"
