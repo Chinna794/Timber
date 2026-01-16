@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link as ScrollLink, scroller } from "react-scroll";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import logo from "../assets/logo1.png";
+import logo from "../assets/logo_1.png";
 
 const MotionDiv = motion.div;
 
@@ -96,7 +96,7 @@ export default function Navbar() {
         scrolled ? "backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-24 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 relative">
         {/* ===================== DESKTOP LOGO ===================== */}
         <MotionDiv
           animate={controls}
@@ -105,8 +105,8 @@ export default function Navbar() {
         >
           <RouterLink to="/" className="flex flex-col items-center">
             <img src={logo} alt="SVM Timbers" className="h-[18rem] w-auto" />
-            <span className="mt-1 text-lg font-semibold tracking-[0.4em] text-[#fcd133]">
-              SVM TIMBERS
+            <span className="mt-1 text-2xl font-semibold tracking-[0.45em] text-[#fcd133]">
+              SVM TIMBER
             </span>
           </RouterLink>
         </MotionDiv>
@@ -119,8 +119,8 @@ export default function Navbar() {
         >
           <RouterLink to="/" className="flex flex-col items-center">
             <img src={logo} alt="SVM Timbers" className="h-40 w-auto" />
-            <span className="mt-1 text-sm font-semibold tracking-[0.35em] text-[#fcd133]">
-              SVM TIMBERS
+            <span className="mt-1 text-base font-semibold tracking-[0.38em] text-[#fcd133]">
+              SVM TIMBER
             </span>
           </RouterLink>
         </MotionDiv>
@@ -132,7 +132,7 @@ export default function Navbar() {
               <button
                 key={item.label}
                 onClick={() => goToSection(item.target)}
-                className={`text-base font-semibold transition ${
+                className={`text-lg font-semibold transition ${
                   activeSection === item.target
                     ? "text-gray-300"
                     : "text-white hover:text-gray-300"
@@ -144,7 +144,7 @@ export default function Navbar() {
               <RouterLink
                 key={item.label}
                 to={item.target}
-                className="text-base font-semibold text-white hover:text-gray-300"
+                className="text-lg font-semibold text-white hover:text-gray-300"
               >
                 {item.label}
               </RouterLink>
@@ -194,7 +194,7 @@ export default function Navbar() {
                 <button
                   key={item.label}
                   onClick={() => goToSection(item.target)}
-                  className="block w-full py-3 text-center text-white hover:text-gray-300"
+                  className="block w-full py-3 text-center text-lg text-white hover:text-gray-300"
                 >
                   {item.label}
                 </button>
@@ -203,7 +203,7 @@ export default function Navbar() {
                   key={item.label}
                   to={item.target}
                   onClick={() => setIsOpen(false)}
-                  className="block py-3 text-center text-white hover:text-gray-300"
+                  className="block py-3 text-center text-lg text-white hover:text-gray-300"
                 >
                   {item.label}
                 </RouterLink>

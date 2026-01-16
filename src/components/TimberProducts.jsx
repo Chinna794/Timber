@@ -4,19 +4,15 @@ import ZoomViewer from "./ZoomViewer";
 
 // Luxury theme pack
 const luxury = {
-  bg: "bg-[#F8F4EF] dark:bg-[#231915]",
-  heading: "text-[#674C28] dark:text-[#FFD700]",
-  tabActive:
-    "from-[#BFA77A] to-[#D8C69C] text-black dark:from-[#FFD700] dark:to-[#DAA520] dark:text-black",
-  tabInactive:
-    "bg-white text-[#5A4A30] border-[#CBB27D] dark:bg-[#1C1C1C] dark:text-[#EADCA6] dark:border-[#7F6E3C] hover:ring-yellow-500",
-  cardBg:
-    "bg-[#FFFDF8]/70 dark:bg-[#1B1B1B]/80 border-[#EADCA6] dark:border-[#5F4E2A]",
-  gradientBox:
-    "from-[#F0E5CF] via-[#E5D4B7] to-[#D9C7A5] dark:from-[#3B2C1A] dark:via-[#2A1F12] dark:to-[#1C140A]",
-  textMain: "text-[#4A3B21] dark:text-[#FAF3E0]",
-  textSub: "text-[#7A684A] dark:text-[#D6C49A]",
-  textLabel: "text-[#5F4E2A] dark:text-[#FFEBC1]",
+  bg: "bg-[#F8F4EF]",
+  heading: "text-[#674C28]",
+  tabActive: "from-[#BFA77A] to-[#D8C69C] text-black",
+  tabInactive: "bg-white text-[#5A4A30] border-[#CBB27D] hover:ring-yellow-500",
+  cardBg: "bg-[#FFFDF8]/70 border-[#EADCA6]",
+  gradientBox: "from-[#F0E5CF] via-[#E5D4B7] to-[#D9C7A5]",
+  textMain: "text-[#4A3B21]",
+  textSub: "text-[#7A684A]",
+  textLabel: "text-[#5F4E2A]",
 };
 
 // Timber Data
@@ -46,6 +42,7 @@ const timberData = {
       "Hunsur teak is valued for its golden-brown color and straight grain. Sourced from Karnataka, India, it's used in traditional Indian carpentry and known for moderate durability, workability, and smooth finish.",
     images: [
       "/img/Hunsur/Hunsur Teak Cut Sizes.jpeg",
+      "/img/Hunsur/Hunsur Teak Cut Sizes2.jpeg",
       "/img/Hunsur/Hunsur Teak Logs1.jpeg",
       "/img/Hunsur/Hunsur Teak Logs.jpeg",
     ],
@@ -65,7 +62,7 @@ const timberData = {
     description:
       "Balharshah teak offers a cost-effective option with reasonable strength and a straight, even texture. Often used in utility-grade furniture, it's a versatile choice for various woodworking projects.",
     images: [
-      "/img/Balharshah/Balharshah Teak Cut Sizes.jpeg",
+      "/img/Balharshah/Balharshah Teak Cut Sizes.png",
       "/img/Balharshah/Balharshah Teak Logs1.jpeg",
       "/img/Balharshah/Balharshah Teak Logs.jpeg",
     ],
@@ -111,7 +108,7 @@ const timberData = {
     description:
       "Mathi wood is highly durable and traditionally used in South Indian architecture for its strength. It's ideal for doors, windows, and structural timber due to its workability.",
     images: [
-      "/img/Matti/Matti wood Cut Sizes.jpeg",
+      "/img/Matti/Matti wood Cut Sizes.png",
       "/img/Matti/Matti Wood Logs.jpeg",
     ],
     name: "Mathi Logs",
@@ -177,19 +174,24 @@ const timberData = {
     available: false,
   },
   "Australia Honne": {
-    description:
-      "Australia Honne is a premium imported variety known for its exceptional durability and resistance to rot and insects. It features a deep, consistent color and fine grain structure.",
-    name: "Australia Honne",
-    benefits: [
-      "Superior Durability",
-      "Rot Resistant",
-      "Consistent Color",
-      "Fine Grain",
-    ],
-    origin: "Australia",
-    applications: ["High-end Furniture", "Flooring", "Structural Elements"],
-    available: true,
-  },
+  description:
+    "Australia Honne is a premium imported variety known for its exceptional durability and resistance to rot and insects. It features a deep, consistent color and fine grain structure.",
+  images: [
+    "/img/Australia/Australia Honne Cut Sizes.png",
+    "/img/Australia/Australia Honne Logs.jpeg",
+    "/img/Australia/Australia Honne Logs.jpg",
+  ],
+  name: "Australia Honne",
+  benefits: [
+    "Superior Durability",
+    "Rot Resistant",
+    "Consistent Color",
+    "Fine Grain",
+  ],
+  origin: "Australia",
+  applications: ["High-end Furniture", "Flooring", "Structural Elements"],
+  available: true,
+},
 };
 
 const productHierarchy = {
@@ -355,22 +357,22 @@ export default function TimberProducts() {
           className={`${luxury.cardBg} rounded-2xl shadow-xl overflow-hidden border`}
         >
           {/* Main Category Tabs */}
-          <div className="flex border-b border-[#EADCA6] dark:border-[#5F4E2A]">
+          <div className="flex border-b border-[#EADCA6] ">
             {Object.keys(productHierarchy).map((category) => (
               <button
                 key={category}
                 onClick={() => updateMainCategory(category)}
                 className={`flex-1 text-center py-5 px-6 transition-all duration-300 flex items-center justify-center gap-2 ${
                   mainCategory === category
-                    ? `bg-gradient-to-r ${luxury.tabActive} border-b-2 border-[#674C28] dark:border-[#FFD700] font-medium`
+                    ? `bg-gradient-to-r ${luxury.tabActive} border-b-2 border-[#674C28]  font-medium`
                     : `${luxury.tabInactive} hover:bg-[#F0E5CF]/40 dark:hover:bg-[#3B2C1A]/40`
                 }`}
               >
                 <span
                   className={
                     mainCategory === category
-                      ? "text-black dark:text-black"
-                      : "text-[#674C28] dark:text-[#EADCA6]"
+                      ? "text-black "
+                      : "text-[#674C28]"
                   }
                 >
                   {Icons[category]}
@@ -378,7 +380,7 @@ export default function TimberProducts() {
                 <span className="text-sm leading-tight">
                   {category}{" "}
                   <span
-                    className="text-[11px] italic block md:inline text-[#7A684A] dark:text-[#D6C49A]"
+                    className="text-[11px] italic block md:inline text-[#7A684A] "
                     style={{ color: "#7A684A" }}
                   >
                     ({categoryLocalNames[category]})
@@ -391,11 +393,11 @@ export default function TimberProducts() {
           {/* Sub Category & Final Product Selection */}
           <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#EADCA6] dark:divide-[#5F4E2A]">
             {/* Sub Category Pills */}
-            <div className="p-6 bg-gradient-to-b from-[#F0E5CF]/50 to-[#FFFDF8]/50 dark:from-[#3B2C1A]/50 dark:to-[#1B1B1B]/50">
+            <div className="p-6 bg-gradient-to-b from-[#F0E5CF]/50 to-[#FFFDF8]/50 ">
               <h3
                 className={`text-sm font-semibold ${luxury.textLabel} mb-4 flex items-center`}
               >
-                <span className="w-1 h-6 bg-[#BFA77A] dark:bg-[#FFD700] rounded mr-2"></span>
+                <span className="w-1 h-6 bg-[#BFA77A]  rounded mr-2"></span>
                 Select Type
               </h3>
               <div className="flex flex-col gap-2">
@@ -405,8 +407,8 @@ export default function TimberProducts() {
                     onClick={() => updateSubCategory(sub)}
                     className={`px-5 py-3 rounded-lg text-sm transition-all flex justify-between items-center ${
                       subCategory === sub
-                        ? "bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] text-black shadow-md"
-                        : "bg-white dark:bg-[#1C1C1C] text-[#5A4A30] dark:text-[#EADCA6] border border-[#CBB27D] dark:border-[#7F6E3C] hover:border-[#BFA77A] dark:hover:border-[#DAA520]"
+                        ? "bg-gradient-to-r from-[#BFA77A] to-[#D8C69C]  text-black shadow-md"
+                        : "bg-white text-[#5A4A30] border border-[#CBB27D]  hover:border-[#BFA77A] dark:hover:border-[#DAA520]"
                     }`}
                   >
                     <span>{sub}</span>
@@ -414,7 +416,7 @@ export default function TimberProducts() {
                       className={`text-xs rounded-full px-2 py-0.5 ${
                         subCategory === sub
                           ? "bg-white/20 text-black"
-                          : "bg-[#F0E5CF] dark:bg-[#3B2C1A] text-[#674C28] dark:text-[#EADCA6]"
+                          : "bg-[#F0E5CF]  text-[#674C28] "
                       }`}
                     >
                       {
@@ -433,7 +435,7 @@ export default function TimberProducts() {
               <h3
                 className={`text-sm font-semibold ${luxury.textLabel} mb-4 flex items-center`}
               >
-                <span className="w-1 h-6 bg-[#BFA77A] dark:bg-[#FFD700] rounded mr-2"></span>
+                <span className="w-1 h-6 bg-[#BFA77A]  rounded mr-2"></span>
                 Available Products
               </h3>
 
@@ -449,10 +451,10 @@ export default function TimberProducts() {
                       className={`rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
                         finalProduct === product
                           ? "ring-2 ring-[#BFA77A] dark:ring-[#FFD700] shadow-lg"
-                          : "shadow-sm border border-[#EADCA6] dark:border-[#5F4E2A] hover:shadow-md"
+                          : "shadow-sm border border-[#EADCA6]  hover:shadow-md"
                       }`}
                     >
-                      <div className="h-24 flex items-center justify-between bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] p-4">
+                      <div className="h-24 flex items-center justify-between bg-gradient-to-r from-[#BFA77A] to-[#D8C69C]  p-4">
                         <h3 className="text-black font-medium">{product}</h3>
                         <span
                           className={`text-xs bg-white/20 text-black rounded-full px-2 py-1 ${
@@ -462,8 +464,8 @@ export default function TimberProducts() {
                           {finalProduct === product ? "Selected" : "Select"}
                         </span>
                       </div>
-                      <div className="p-4 bg-white dark:bg-[#1C1C1C] border-t border-[#EADCA6]/30 dark:border-[#5F4E2A]/30">
-                        <p className="text-xs text-[#7A684A] dark:text-[#D6C49A] line-clamp-2">
+                      <div className="p-4 bg-white  border-t border-[#EADCA6]/30 ">
+                        <p className="text-xs text-[#7A684A]  line-clamp-2">
                           {timberData[product]?.description.substring(0, 100)}
                           ...
                         </p>
@@ -472,7 +474,7 @@ export default function TimberProducts() {
                   ))}
                 </div>
               ) : (
-                <div className="bg-[#F0E5CF]/30 dark:bg-[#3B2C1A]/30 rounded-lg p-4 text-center">
+                <div className="bg-[#F0E5CF]/30  rounded-lg p-4 text-center">
                   <p className={`${luxury.textSub} text-sm`}>
                     No available products in this category
                   </p>
@@ -481,7 +483,7 @@ export default function TimberProducts() {
 
               {/* Non-Available Products List */}
               {nonAvailableProducts.length > 0 && (
-                <div className="mt-6 pt-6 border-t border-[#EADCA6]/50 dark:border-[#5F4E2A]/50">
+                <div className="mt-6 pt-6 border-t border-[#EADCA6]/50 ">
                   <h4
                     className={`text-sm font-medium ${luxury.textLabel} mb-3`}
                   >
@@ -491,7 +493,7 @@ export default function TimberProducts() {
                     {nonAvailableProducts.map((product) => (
                       <span
                         key={product}
-                        className="px-3 py-1 text-xs rounded-full bg-[#F0E5CF]/50 dark:bg-[#3B2C1A]/50 text-[#7A684A] dark:text-[#D6C49A] border border-[#EADCA6]/30 dark:border-[#5F4E2A]/30"
+                        className="px-3 py-1 text-xs rounded-full bg-[#F0E5CF]/50  text-[#7A684A]  border border-[#EADCA6]/30 "
                       >
                         {product}
                       </span>
@@ -519,7 +521,7 @@ export default function TimberProducts() {
           }}
         >
           {/* Background overlay for better contrast */}
-          <div className="absolute inset-0 bg-black/30 dark:bg-black/50 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
           {/* Card Content */}
           <div className="relative z-10 p-6 md:p-12 max-w-7xl mx-auto">
@@ -532,10 +534,10 @@ export default function TimberProducts() {
               key={currentData.name}
             >
               <div
-                className={`bg-gradient-to-r ${luxury.gradientBox} text-[#4A3B21] dark:text-[#FAF3E0] p-6 md:p-10`}
+                className={`bg-gradient-to-r ${luxury.gradientBox} text-[#4A3B21]  p-6 md:p-10`}
               >
                 <div className="max-w-4xl mx-auto">
-                  <span className="inline-block px-3 py-1 bg-[#4A3B21]/20 dark:bg-[#FAF3E0]/20 text-[#4A3B21] dark:text-[#FAF3E0] rounded-full text-xs font-medium mb-4">
+                  <span className="inline-block px-3 py-1 bg-[#4A3B21]/20  text-[#4A3B21]  rounded-full text-xs font-medium mb-4">
                     {mainCategory} / {subCategory}
                   </span>
                   <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -543,7 +545,7 @@ export default function TimberProducts() {
                       <h3 className="text-3xl font-bold mb-2">
                         {currentData.name}
                       </h3>
-                      <p className="text-[#7A684A] dark:text-[#D6C49A]">
+                      <p className="text-[#7A684A] ">
                         {currentData.origin}
                       </p>
                     </div>
@@ -551,7 +553,7 @@ export default function TimberProducts() {
                       {currentData.applications?.slice(0, 3).map((app, i) => (
                         <span
                           key={i}
-                          className="text-xs bg-[#4A3B21]/10 dark:bg-[#FAF3E0]/10 px-3 py-1 rounded-full border border-[#4A3B21]/20 dark:border-[#FAF3E0]/20"
+                          className="text-xs bg-[#4A3B21]/10 px-3 py-1 rounded-full border border-[#4A3B21]/20 "
                         >
                           {app}
                         </span>
@@ -569,7 +571,7 @@ export default function TimberProducts() {
                       <>
                         {/* Main Image */}
                         <div
-                          className="relative rounded-xl overflow-hidden aspect-video bg-[#F0E5CF] dark:bg-[#3B2C1A] shadow-inner mb-4 cursor-pointer"
+                          className="relative rounded-xl overflow-hidden aspect-video bg-[#F0E5CF]  shadow-inner mb-4 cursor-pointer"
                           onClick={() => setModalType("image")} // Open modal on click
                         >
                           <img
@@ -603,36 +605,41 @@ export default function TimberProducts() {
                         {/* Modal / Popup */}
                         {modalType === "image" && (
                           <div
-                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md"
                             onClick={() => setModalType(null)}
                           >
                             <div
-                              className="relative w-[50vw] h-[50vh] flex items-center justify-center"
+                              className="relative bg-white rounded-3xl p-4 max-w-5xl w-full mx-4 shadow-2xl"
                               onClick={(e) => e.stopPropagation()}
                             >
                               {/* Close Button */}
                               <button
-                                className="absolute top-2 right-2 text-white text-2xl font-bold hover:text-gray-300 transition-colors"
+                                className="absolute top-3 right-4 text-3xl text-gray-600 hover:text-black transition-colors z-10"
                                 onClick={() => setModalType(null)}
                               >
                                 &times;
                               </button>
 
                               {/* Zoomable Image */}
-                              <div className="w-full h-full flex items-center justify-center">
+                              <div className="w-full h-[70vh] flex items-center justify-center">
                                 <ZoomViewer
                                   src={currentData.images[activeImageIndex]}
                                   zoom={2.5}
-                                  className="w-full h-full object-contain rounded-lg shadow-xl"
+                                  className="w-full h-full object-contain rounded-xl"
                                 />
+                              </div>
+
+                              {/* Image Counter */}
+                              <div className="text-center mt-3 text-sm text-gray-500">
+                                {activeImageIndex + 1} / {currentData.images.length}
                               </div>
                             </div>
                           </div>
                         )}
                       </>
                     ) : (
-                      <div className="rounded-xl overflow-hidden aspect-video bg-[#F0E5CF] dark:bg-[#3B2C1A] shadow-inner flex items-center justify-center">
-                        <p className="text-[#7A684A] dark:text-[#D6C49A] text-center px-6">
+                      <div className="rounded-xl overflow-hidden aspect-video bg-[#F0E5CF]  shadow-inner flex items-center justify-center">
+                        <p className="text-[#7A684A]  text-center px-6">
                           {currentData.available
                             ? "Product images coming soon"
                             : "This product is currently not available"}
@@ -650,7 +657,7 @@ export default function TimberProducts() {
                   >
                     <MOTION.div
                       variants={itemVariants}
-                      className="mb-6 bg-[#F0E5CF]/50 dark:bg-[#3B2C1A]/50 p-5 rounded-xl border border-[#EADCA6] dark:border-[#5F4E2A]"
+                      className="mb-6 bg-[#F0E5CF]/50  p-5 rounded-xl border border-[#EADCA6] "
                     >
                       <h4 className={`${luxury.textLabel} font-medium mb-3`}>
                         Description
@@ -687,7 +694,7 @@ export default function TimberProducts() {
                             key={i}
                             className={`flex items-center gap-2 text-sm ${luxury.textMain}`}
                           >
-                            <span className="w-1.5 h-1.5 bg-[#BFA77A] dark:bg-[#FFD700] rounded-full"></span>
+                            <span className="w-1.5 h-1.5 bg-[#BFA77A] rounded-full"></span>
                             {benefit}
                           </div>
                         ))}
@@ -717,7 +724,7 @@ export default function TimberProducts() {
                         {currentData.applications?.map((app, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1 rounded-full text-xs bg-[#F0E5CF] dark:bg-[#3B2C1A] text-[#5F4E2A] dark:text-[#EADCA6]"
+                            className="px-3 py-1 rounded-full text-xs bg-[#F0E5CF]  text-[#5F4E2A] "
                           >
                             {app}
                           </span>
@@ -737,7 +744,7 @@ export default function TimberProducts() {
                               });
                             }
                           }}
-                          className="w-full py-3 px-6 bg-gradient-to-r from-[#BFA77A] to-[#D8C69C] dark:from-[#FFD700] dark:to-[#DAA520] text-black rounded-lg hover:from-[#A89069] hover:to-[#C7B58B] dark:hover:from-[#EBC700] dark:hover:to-[#C99519] transition-colors text-sm font-medium shadow-md flex items-center justify-center gap-2"
+                          className="w-full py-3 px-6 bg-gradient-to-r from-[#BFA77A] to-[#D8C69C]  text-black rounded-lg hover:from-[#A89069] hover:to-[#C7B58B] cursor-pointer transition-colors text-sm font-medium shadow-md flex items-center justify-center gap-2"
                         >
                           <svg
                             className="w-4 h-4"
@@ -757,7 +764,7 @@ export default function TimberProducts() {
                       ) : (
                         <button
                           disabled
-                          className="w-full py-3 px-6 bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg cursor-not-allowed text-sm font-medium shadow-md flex items-center justify-center gap-2"
+                          className="w-full py-3 px-6 bg-gray-300  text-gray-500 rounded-lg cursor-not-allowed text-sm font-medium shadow-md flex items-center justify-center gap-2"
                         >
                           <svg
                             className="w-4 h-4"

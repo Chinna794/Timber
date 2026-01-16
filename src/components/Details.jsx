@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion as MOTION } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion as MOTION } from "framer-motion";
+import AboutUs from "./AboutUs";
 
 export default function Details() {
   const [showMap, setShowMap] = useState(false);
@@ -7,16 +8,17 @@ export default function Details() {
   useEffect(() => {
     const hash = window.location.hash;
 
-    if (hash === '#our-story') {
-      window.history.scrollRestoration = 'manual';
+    if (hash === "#our-story") {
+      window.history.scrollRestoration = "manual";
       window.scrollTo(0, 0);
 
       setTimeout(() => {
-        const element = document.getElementById('our-story');
+        const element = document.getElementById("our-story");
         if (element) {
           const yOffset = -150;
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
+          const y =
+            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
         }
       }, 100);
     }
@@ -24,22 +26,22 @@ export default function Details() {
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 }
+    visible: { opacity: 1, y: 0 },
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
+      transition: { staggerChildren: 0.15 },
+    },
   };
 
   return (
     <div className="bg-gradient-to-b from-[#FAF3E0] via-[#F5EBDF] to-[#F0E2CF] px-6 pt-32 pb-20 space-y-32">
       {/* ======================= OUR STORY ======================= */}
-      <MOTION.div 
-        id="our-story" 
+      <MOTION.div
+        id="our-story"
         className="max-w-7xl mx-auto"
         initial="hidden"
         whileInView="visible"
@@ -55,7 +57,7 @@ export default function Details() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* LEFT: Overlapping Images with Enhanced Effects */}
-          <MOTION.div 
+          <MOTION.div
             variants={fadeInUp}
             className="w-full relative h-[500px] md:h-[600px]"
           >
@@ -63,7 +65,7 @@ export default function Details() {
             <div className="absolute inset-0 bg-gradient-to-br from-[#A0522D]/10 to-[#7B4B2A]/10 rounded-3xl blur-3xl"></div>
 
             {/* 1st Image */}
-            <MOTION.div 
+            <MOTION.div
               initial={{ opacity: 0, x: -50, rotate: -5 }}
               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -82,7 +84,7 @@ export default function Details() {
             </MOTION.div>
 
             {/* 2nd Image */}
-            <MOTION.div 
+            <MOTION.div
               initial={{ opacity: 0, x: 50, rotate: 5 }}
               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -101,7 +103,7 @@ export default function Details() {
             </MOTION.div>
 
             {/* 3rd Image */}
-            <MOTION.div 
+            <MOTION.div
               initial={{ opacity: 0, y: 50, rotate: -3 }}
               whileInView={{ opacity: 1, y: 0, rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -122,7 +124,7 @@ export default function Details() {
 
           {/* RIGHT: Our Story Content */}
           <MOTION.div variants={fadeInUp} className="space-y-6">
-            <MOTION.div 
+            <MOTION.div
               variants={fadeInUp}
               className="inline-flex items-center gap-3 bg-gradient-to-r from-[#A0522D] to-[#8B4513] text-white text-base md:text-lg font-bold px-8 py-3 rounded-full shadow-lg"
             >
@@ -130,48 +132,62 @@ export default function Details() {
               <span>Founded in 1982</span>
             </MOTION.div>
 
-            <MOTION.div 
-  variants={fadeInUp}
-  className="text-gray-800 text-base md:text-lg leading-relaxed space-y-5"
->
-
+            <MOTION.div
+              variants={fadeInUp}
+              className="text-gray-800 text-base md:text-lg leading-relaxed space-y-5"
+            >
               <p className="first-letter:text-6xl first-letter:float-left first-letter:font-bold first-letter:mr-3 first-letter:leading-none first-letter:text-[#A0522D] first-letter:font-playfair">
-                Sri Vishnu Maheshwara Timber (SVMT) stands as a proud sub-branch of Sri Venkateswara Saw Mill cum Depot, delivering premium hardwood timber of exceptional quality for over four decades.
+                Sri Vishnu Maheshwara Timber (SVMT) stands as a proud sub-branch
+                of Sri Venkateswara Saw Mill cum Depot, delivering premium
+                hardwood timber of exceptional quality for over four decades.
               </p>
 
               <p className="pl-4 border-l-4 border-[#A0522D]/30">
-                As an independent family business rooted in the heart of India, we've established our presence across Andhra Pradesh and Karnataka, serving clients nationwide and beyond.
+                As an independent family business rooted in the heart of India,
+                we've established our presence across Andhra Pradesh and
+                Karnataka, serving clients nationwide and beyond.
               </p>
 
               <p>
-                Our fully operational sawmill in{' '}
+                Our fully operational sawmill in{" "}
                 <span
                   onClick={() => setShowMap(true)}
                   className="inline-flex items-center gap-1 text-[#A0522D] hover:text-[#7B4B2A] cursor-pointer font-semibold transition duration-200 underline decoration-wavy decoration-[#A0522D]/30 hover:decoration-[#A0522D]"
                 >
                   📍 Penukonda
                 </span>
-                , Andhra Pradesh serves as our central hub, allowing us to craft bespoke timber solutions and ensure prompt delivery throughout India.
+                , Andhra Pradesh serves as our central hub, allowing us to craft
+                bespoke timber solutions and ensure prompt delivery throughout
+                India.
               </p>
 
               <p className="bg-gradient-to-r from-[#F5EBDF] to-transparent p-4 rounded-lg border-l-4 border-[#A0522D]">
-                What truly sets SVMT apart is our unwavering commitment to quality, our extensive range of timber products, and our personalized service approach.
+                What truly sets SVMT apart is our unwavering commitment to
+                quality, our extensive range of timber products, and our
+                personalized service approach.
               </p>
 
               <p>
-                Whether you're undertaking a major commercial project or a smaller personal endeavor, SVMT brings over 42 years of timber expertise to every piece we deliver.
+                Whether you're undertaking a major commercial project or a
+                smaller personal endeavor, SVMT brings over 42 years of timber
+                expertise to every piece we deliver.
               </p>
 
               {/* Decorative Quote */}
-              <MOTION.div 
+              <MOTION.div
                 variants={fadeInUp}
                 className="relative mt-10 p-6 bg-gradient-to-br from-[#A0522D]/10 to-transparent rounded-2xl"
               >
-                <div className="absolute -top-6 -left-4 text-6xl text-[#A0522D]/20 font-serif">"</div>
-                <div className="text-[#7B4B2A] font-medium text-xl md:text-2xl italic font-playfair">
-                  Crafting quality timber with tradition, passion, and precision.
+                <div className="absolute -top-6 -left-4 text-6xl text-[#A0522D]/20 font-serif">
+                  "
                 </div>
-                <div className="absolute -bottom-6 -right-4 text-6xl text-[#A0522D]/20 font-serif">"</div>
+                <div className="text-[#7B4B2A] font-medium text-xl md:text-2xl italic font-playfair">
+                  Crafting quality timber with tradition, passion, and
+                  precision.
+                </div>
+                <div className="absolute -bottom-6 -right-4 text-6xl text-[#A0522D]/20 font-serif">
+                  "
+                </div>
               </MOTION.div>
             </MOTION.div>
           </MOTION.div>
@@ -180,14 +196,14 @@ export default function Details() {
 
       {/* ======================= MODAL ======================= */}
       {showMap && (
-        <MOTION.div 
+        <MOTION.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4"
           onClick={() => setShowMap(false)}
         >
-          <MOTION.div 
+          <MOTION.div
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             className="bg-white rounded-2xl p-6 max-w-4xl w-full relative shadow-2xl"
@@ -216,8 +232,12 @@ export default function Details() {
         </MOTION.div>
       )}
 
+      <section id="about-us" className="min-h-screen bg-white ">
+        <AboutUs />
+      </section>
+
       {/* ======================= WHY CHOOSE US ======================= */}
-      <MOTION.div 
+      <MOTION.div
         className="max-w-7xl mx-auto"
         initial="hidden"
         whileInView="visible"
@@ -249,19 +269,19 @@ export default function Details() {
             >
               {/* Decorative corner */}
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#A0522D]/20 to-transparent rounded-bl-3xl"></div>
-              
+
               <div className="flex items-start gap-4">
-                <MOTION.div 
+                <MOTION.div
                   className="text-4xl flex-shrink-0"
-                  animate={{ 
+                  animate={{
                     rotate: [0, 10, -10, 0],
-                    scale: [1, 1.1, 1]
+                    scale: [1, 1.1, 1],
                   }}
-                  transition={{ 
+                  transition={{
                     duration: 3,
                     delay: idx * 0.2,
                     repeat: Infinity,
-                    repeatDelay: 2
+                    repeatDelay: 2,
                   }}
                 >
                   {item.icon}
@@ -281,7 +301,7 @@ export default function Details() {
       </MOTION.div>
 
       {/* ======================= GALLERY ======================= */}
-      <MOTION.div 
+      <MOTION.div
         className="max-w-7xl mx-auto"
         initial="hidden"
         whileInView="visible"
@@ -294,7 +314,8 @@ export default function Details() {
           </h3>
           <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full mb-4"></div>
           <p className="text-gray-600  max-w-2xl mx-auto">
-            Explore our craftsmanship through these stunning visuals of our timber work and facilities
+            Explore our craftsmanship through these stunning visuals of our
+            timber work and facilities
           </p>
         </MOTION.div>
 
@@ -317,12 +338,12 @@ export default function Details() {
                   alt={`Gallery Image ${i + 1}`}
                   className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
+
                 {/* Number badge */}
-                <MOTION.div 
+                <MOTION.div
                   className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center font-bold text-[#A0522D] shadow-lg"
                   whileHover={{ rotate: 360, scale: 1.2 }}
                   transition={{ duration: 0.5 }}
@@ -332,7 +353,9 @@ export default function Details() {
 
                 {/* Image title overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="text-white font-semibold text-lg">Gallery Image {i + 1}</p>
+                  <p className="text-white font-semibold text-lg">
+                    Gallery Image {i + 1}
+                  </p>
                   <p className="text-white/80 text-sm">Our Workshop</p>
                 </div>
               </div>
