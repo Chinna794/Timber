@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import log1 from "../../public/img/log1.jpg";
-import log2 from "../../public/img/log2.jpg";
-import log3 from "../../public/img/log3.jpg";
+import log1 from "../assets/about/log1.jpg";
+import log2 from "../assets/about/log2.jpg";
+import log3 from "../assets/about/log3.jpg";
+
 import { useNavigate } from "react-router-dom";
 import { motion as MOTION } from "framer-motion";
 
@@ -122,7 +123,7 @@ export default function AboutUs() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={handleLearnMore}
-                      className="mt-8 px-8 py-3 bg-gradient-to-r from-[#A67C52] to-[#8B5E34] text-white font-semibold rounded-full"
+                      className="mt-8 px-8 py-3 bg-linear-to-r from-[#A67C52] to-[#8B5E34] text-white font-semibold rounded-full"
                     >
                       Learn More
                     </MOTION.button>
