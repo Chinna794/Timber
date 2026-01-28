@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { motion as MOTION } from "framer-motion";
 import ZoomViewer from "./ZoomViewer";
 
@@ -15,118 +15,223 @@ const luxury = {
   textLabel: "text-[#5F4E2A]",
 };
 
+const highlightKeywords = (text) => {
+  const keywords = [
+    "durability",
+    "natural oil[s]?",
+    "moisture resistance",
+    "termite[s]?",
+    "fungal",
+    "strength",
+    "workability",
+    "dimensional stability",
+    "low maintenance",
+    "golden[- ]brown",
+    "dense",
+    "hardwood",
+  ];
+
+  let highlighted = text;
+
+  keywords.forEach((word) => {
+    const regex = new RegExp(`(${word})`, "gi");
+    highlighted = highlighted.replace(
+      regex,
+      `<span class="font-semibold text-[#674C28]">$1</span>`,
+    );
+  });
+
+  return highlighted;
+};
+
 // Timber Data
 
 const timberData = {
   "Burma Teak": {
     description:
-      "Burma teak, known for its high quality and durability, is prized for its exceptional oil content, which provides natural resistance to water, decay, and pests. This wood is also known for its strength, straight grain, and ability to resist splitting, cracking, and weathering. It's a popular choice for outdoor furniture, decking, and boat decks.",
+      "Burma teak, also known as Burmese teak, is one of the most premium and sought-after hardwoods in the world. Renowned for its exceptional durability, natural beauty, and resistance to decay, this teak variety has been widely used for centuries in both luxury woodworking and demanding outdoor applications.\n\n" +
+      "The wood typically displays a rich golden to medium brown color that deepens gracefully with age, enhancing its visual appeal over time. It features a predominantly straight grain, though occasional wavy or interlocked patterns add a distinctive character. The slightly coarse texture is complemented by a natural oily sheen, which contributes to its moisture resistance and long-lasting performance.\n\n" +
+      "Burma teak is a dense and robust hardwood, offering excellent mechanical strength and wear resistance. Its high natural oil content provides outstanding protection against decay, termites, and other pests, making it particularly suitable for outdoor environments and marine conditions. The heartwood is especially durable and remains stable even when exposed to harsh weather.\n\n" +
+      "Despite its density, Burma teak is relatively easy to work with and responds well to finishing. While its natural silica content can dull tools, it glues and finishes effectively with proper surface preparation. Because of these qualities, it has long been a preferred material for high-quality furniture, flooring, decking, and shipbuilding.\n\n" +
+      "Overall, Burma teak represents the perfect balance of strength, elegance, and longevity. Its proven performance, historical significance, and timeless appearance make it a premium choice for both traditional craftsmanship and modern architectural applications.",
+
     images: [
       "/img/Burma/Burma Teak Cut Sizes.jpeg",
       "/img/Burma/Burma Teak Cut Sizes1.jpeg",
       "/img/Burma/Burma Teak logs.jpeg",
     ],
+
     name: "Burma Teak",
+
     benefits: [
-      "Water Resistant",
-      "Decay Resistant",
-      "Strong Grain",
-      "Premium Quality",
+      "Exceptional Durability",
+      "High Natural Oil Content",
+      "Termite & Decay Resistant",
+      "Weather & Moisture Resistant",
+      "Strong & Dense Hardwood",
+      "Premium Aesthetic Appeal",
     ],
-    origin: "Myanmar (formerly Burma)",
-    applications: ["Outdoor Furniture", "Boat Building", "Luxury Interiors"],
+
+    origin: "Myanmar (Burma)",
+
+    applications: [
+      "Outdoor Furniture",
+      "Boat Building & Marine Decking",
+      "Flooring & Decking",
+      "Luxury Interiors",
+      "Architectural Woodwork",
+    ],
+
     available: true,
   },
+
   "Hunsur Teak": {
     description:
-      "Hunsur teak is valued for its golden-brown color and straight grain. Sourced from Karnataka, India, it's used in traditional Indian carpentry and known for moderate durability, workability, and smooth finish.",
+      "Hunsur teak wood is renowned for its exceptional durability, natural oil content, and refined aesthetic appeal, making it an excellent choice for both indoor and outdoor applications. Derived from Tectona grandis and sourced from the Hunsur region of Karnataka, this teak variety is naturally resistant to decay, insects, and fungal attacks, ensuring long-lasting performance even in challenging environments.\n\n" +
+      "One of the defining characteristics of Hunsur teak is its beautiful golden-brown color combined with fine, straight grain patterns. These visual qualities enhance the elegance of finished products, making it a preferred material for premium furniture and high-end interior applications. The wood is also highly workable, allowing craftsmen to carve, shape, and finish it with ease, which makes it ideal for intricate designs and detailed woodworking.\n\n" +
+      "Thanks to its high natural oil content, Hunsur teak offers excellent moisture resistance, protecting it from warping and cracking in humid or outdoor conditions. It also exhibits outstanding dimensional stability, maintaining its shape and size despite fluctuations in weather or humidity. Additionally, Hunsur teak requires very low maintenance and can be left untreated outdoors, where it naturally ages into an attractive silver-grey patina.\n\n" +
+      "Overall, Hunsur teak is a premium timber choice for customers seeking a combination of durability, beauty, stability, and minimal maintenance. Its unique properties make it widely favored across furniture manufacturing, marine construction, and architectural applications.",
+
     images: [
       "/img/Hunsur/Hunsur Teak Cut Sizes.jpeg",
-      "/img/Hunsur/Hunsur Teak Cut Sizes2.jpeg",
       "/img/Hunsur/Hunsur Teak Logs1.jpeg",
       "/img/Hunsur/Hunsur Teak Logs.jpeg",
     ],
+
     name: "Hunsur Teak",
+
     benefits: [
-      "Smooth Finish",
-      "Traditional Appeal",
-      "Golden-Brown Color",
-      "Good Workability",
+      "High Natural Durability",
+      "Insect & Fungal Resistance",
+      "Moisture Resistant",
+      "Excellent Workability",
+      "Dimensional Stability",
+      "Low Maintenance",
     ],
-    origin: "Karnataka, India",
-    applications: ["Traditional Carpentry", "Indoor Furniture", "Cabinetry"],
+
+    origin: "Hunsur, Karnataka, India",
+
+    applications: [
+      "Indoor & Outdoor Furniture",
+      "Marine & Boat Decking",
+      "Architectural Elements",
+      "Flooring & Decking",
+    ],
+
     available: true,
   },
 
   "Balharshah Teak": {
     description:
-      "Balharshah teak offers a cost-effective option with reasonable strength and a straight, even texture. Often used in utility-grade furniture, it's a versatile choice for various woodworking projects.",
+      "Balharshah teak wood is renowned for its exceptional density, strength, and long-lasting durability, making it an ideal choice for both structural and decorative applications. Sourced from the Balharshah region, this teak variety is highly valued in premium construction and furniture manufacturing due to its robust performance and classic appearance.\n\n" +
+      "One of the most distinctive features of Balharshah teak is its rich golden-brown color, which naturally deepens and develops a refined patina over time. This aging characteristic enhances the visual appeal of furniture and architectural elements, making it a preferred material for luxury homes and high-end interiors.\n\n" +
+      "Balharshah teak contains natural oils that provide excellent resistance to moisture, pests, and decay. These properties make it highly suitable for outdoor applications such as decking, garden furniture, and marine-related construction. Despite its high density and strength, the wood offers good workability, allowing craftsmen to cut, shape, and detail it with precision without compromising structural integrity.\n\n" +
+      "With its dense grain structure and superior longevity, Balharshah teak is capable of withstanding harsh environmental conditions and long-term use. Furniture and structures made from this timber can last for generations, making it a trusted choice among architects, designers, and homeowners seeking a balance of strength, beauty, and reliability.",
+
     images: [
       "/img/Balharshah/Balharshah Teak Cut Sizes.png",
       "/img/Balharshah/Balharshah Teak Logs1.jpeg",
       "/img/Balharshah/Balharshah Teak Logs.jpeg",
     ],
+
     name: "Balharshah Teak",
+
     benefits: [
-      "Cost-Effective",
-      "Versatile",
-      "Even Texture",
-      "Reasonable Strength",
+      "High Density & Strength",
+      "Excellent Durability",
+      "Moisture & Pest Resistant",
+      "Rich Aging Patina",
+      "Good Workability",
+      "Long Service Life",
     ],
-    origin: "Maharashtra, India",
+
+    origin: "Balharshah, Maharashtra, India",
+
     applications: [
-      "Utility Furniture",
-      "General Woodworking",
-      "Budget Projects",
+      "High-end Furniture",
+      "Doors & Window Frames",
+      "Structural Beams",
+      "Outdoor Decking",
+      "Marine Applications",
     ],
+
     available: true,
   },
+
   "Mysore Honne": {
     description:
-      "Mysore Honne is highly regarded for its unique characteristics and is sourced from the Mysore region in Karnataka, India. It features a beautiful golden hue and excellent workability, making it suitable for premium furniture and interior wood paneling.",
+      "Mysore Honne wood is a premium hardwood known for its exceptional strength, durability, and rich reddish-brown color. Sourced from the Mysore region of Karnataka, this dense and heavy timber is widely used in furniture making, construction, and decorative interiors. Its natural appearance and solid performance make it a preferred choice for both functional and aesthetic applications.\n\n" +
+      "One of the key characteristics of Mysore Honne is its high durability, offering approximately 70–80% of teak’s strength while being more cost-effective. The wood features a straight to slightly interlocked grain with a fine, smooth texture, giving it a refined finish comparable to high-end hardwoods. This makes it ideal for premium doors, windows, flooring, and interior paneling.\n\n" +
+      "Mysore Honne is naturally resistant to termites and fungal attacks, which significantly enhances its lifespan and reduces the need for chemical treatments. It also contains natural resins and gum, traditionally associated with medicinal value, adding to its unique character. While the wood is generally easy to work with and responds well to polishing and finishing, proper seasoning is recommended to manage moisture content and prevent warping or gum bleed.\n\n" +
+      "Overall, Mysore Honne is a versatile and reliable timber choice that balances strength, beauty, and affordability. Its durability, elegant appearance, and wide range of applications make it a popular option among architects, designers, craftsmen, and homeowners seeking long-lasting and visually appealing wood solutions.",
+
     images: [
       "/img/Mysore/Mysore Honee Log.jpeg",
       "/img/Mysore/Mysore Honne Cut.jpeg",
       "/img/Mysore/Mysore Honne Cut1.jpeg",
     ],
-    name: "Mysore Teak",
+
+    name: "Mysore Honne",
+
     benefits: [
-      "Beautiful Hue",
-      "Excellent Workability",
-      "Premium Finish",
-      "Unique Character",
+      "High Strength & Durability",
+      "Termite & Fungal Resistant",
+      "Rich Reddish-Brown Color",
+      "Fine Smooth Texture",
+      "Cost-Effective Alternative to Teak",
+      "Good Workability",
     ],
+
     origin: "Mysore, Karnataka, India",
+
     applications: [
-      "Premium Furniture",
-      "Interior Paneling",
-      "Decorative Elements",
+      "Furniture",
+      "Doors & Windows",
+      "Flooring & Paneling",
+      "Interior Decoration",
+      "Decorative Woodwork",
     ],
+
     available: true,
   },
+
   "Mathi Logs": {
     description:
-      "Mathi wood is highly durable and traditionally used in South Indian architecture for its strength. It's ideal for doors, windows, and structural timber due to its workability.",
+      "Matti wood, scientifically known as Terminalia elliptica and commonly referred to as the Crocodile Bark Tree, is a strong and durable hardwood widely found in India’s dry and moist deciduous forests. It is valued for its structural strength, versatility, and traditional significance in construction and woodworking.\n\n" +
+      "This hardwood is known for its high density, hardness, and strength, which contribute to its excellent load-bearing capacity and resistance to wear. The wood typically ranges in color from light brown to dark brown or brownish-black, often highlighted with darker streaks and a fairly straight to slightly coarse grain. The sapwood is reddish-white and clearly distinguishable from the heartwood, which is moderately durable.\n\n" +
+      "Matti wood offers good resistance to decay, termites, and weathering, making it suitable for both indoor and outdoor applications. Although it does not possess a strong natural aroma or taste, its durability and stability make it a reliable choice for long-term use. The wood finishes well and can be worked into both functional and decorative forms.\n\n" +
+      "Traditionally, Matti wood has been used in furniture making, joinery, paneling, boat building, railway sleepers, and decorative veneers. It is also used in specialty items and musical instruments. Beyond timber usage, the tree holds ecological and cultural importance, as its leaves support tassar silk production, and its bark is used in traditional medicine and natural dyeing.\n\n" +
+      "Overall, Matti wood is a dependable and multifunctional hardwood that combines strength, durability, and aesthetic character, making it a valuable material in both traditional and modern woodworking applications.",
+
     images: [
       "/img/Matti/Matti wood Cut Sizes.png",
       "/img/Matti/Matti Wood Logs.jpeg",
     ],
+
     name: "Mathi Logs",
+
     benefits: [
-      "High Durability",
-      "Architectural Strength",
-      "Traditional Value",
-      "Good Workability",
+      "High Strength & Hardness",
+      "Good Durability",
+      "Termite & Weather Resistant",
+      "Attractive Natural Grain",
+      "Versatile Applications",
     ],
-    origin: "South India",
+
+    origin: "India",
+
     applications: [
-      "Doors",
-      "Windows",
-      "Structural Elements",
-      "Traditional Architecture",
+      "Furniture",
+      "Doors & Windows",
+      "Paneling & Joinery",
+      "Boat Building",
+      "Decorative Veneers",
+      "Structural Applications",
     ],
+
     available: true,
   },
+
   "Malaysia Teak": {
     description:
       "Malaysia teak, known for its rich color variations and dense grain pattern, is sourced from sustainably managed forests in Malaysia. It offers excellent weather resistance and natural oils that protect against insects.",
@@ -174,24 +279,41 @@ const timberData = {
     available: false,
   },
   "Australia Honne": {
-  description:
-    "Australia Honne is a premium imported variety known for its exceptional durability and resistance to rot and insects. It features a deep, consistent color and fine grain structure.",
-  images: [
-    "/img/Australia/Australia Honne Cut Sizes.png",
-    "/img/Australia/Australia Honne Logs.jpeg",
-    "/img/Australia/Australia Honne Logs.jpg",
-  ],
-  name: "Australia Honne",
-  benefits: [
-    "Superior Durability",
-    "Rot Resistant",
-    "Consistent Color",
-    "Fine Grain",
-  ],
-  origin: "Australia",
-  applications: ["High-end Furniture", "Flooring", "Structural Elements"],
-  available: true,
-},
+    description:
+      "Australia Honne wood is a premium hardwood known for its exceptional density, strength, and mechanical performance. Sourced from Australia, this timber is valued for its durability and ability to withstand demanding environmental conditions, making it suitable for both structural and decorative applications.\n\n" +
+      "One of the defining characteristics of Australia Honne is its high durability and stability. The wood performs well in extreme climatic conditions and offers excellent resistance to termites and fungal attacks due to its natural resins and gum content. These properties make it a reliable choice for long-lasting furniture, doors, windows, and outdoor construction when properly treated.\n\n" +
+      "Australia Honne also provides thermal efficiency, helping regulate indoor temperatures by keeping spaces cooler during summer and warmer during winter. Its straight to slightly interlocked grain combined with a fine, smooth texture gives it a refined appearance, while its natural reddish-brown color enhances the visual appeal of interiors and architectural elements.\n\n" +
+      "Despite its strength and density, Australia Honne offers good design flexibility and can be customized for a wide range of applications. With appropriate finishing and surface protection, it delivers excellent performance, environmental sustainability, and long-term value, making it a preferred choice for premium construction and interior projects.",
+
+    images: [
+      "/img/Australia/Australia Honne Cut Sizes.png",
+      "/img/Australia/Australia Honne Logs.jpeg",
+      "/img/Australia/Australia Honne Logs.jpg",
+    ],
+
+    name: "Australia Honne",
+
+    benefits: [
+      "High Density & Strength",
+      "Excellent Durability",
+      "Termite & Fungal Resistant",
+      "Thermal Insulation Properties",
+      "Design Flexibility",
+      "Environmentally Sustainable",
+    ],
+
+    origin: "Australia",
+
+    applications: [
+      "Furniture",
+      "Doors & Windows",
+      "Flooring",
+      "Structural Elements",
+      "Decorative Interiors",
+    ],
+
+    available: true,
+  },
 };
 
 const productHierarchy = {
@@ -266,6 +388,16 @@ export default function TimberProducts() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [modalType, setModalType] = useState(null);
+  const descriptionRef = useRef(null);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [contentHeight, setContentHeight] = useState(0);
+  const currentData = timberData[finalProduct];
+
+  useLayoutEffect(() => {
+    if (descriptionRef.current && currentData?.description) {
+      setContentHeight(descriptionRef.current.scrollHeight);
+    }
+  }, [currentData]);
 
   useEffect(() => {
     setActiveImageIndex(0);
@@ -283,7 +415,7 @@ export default function TimberProducts() {
     // Find first available product in the subcategory
     const availableProduct =
       productHierarchy[category][firstSub].find(
-        (product) => timberData[product]?.available
+        (product) => timberData[product]?.available,
       ) || productHierarchy[category][firstSub][0];
 
     setSubCategory(firstSub);
@@ -294,7 +426,7 @@ export default function TimberProducts() {
     // Find first available product in the subcategory
     const availableProduct =
       productHierarchy[mainCategory][subcategory].find(
-        (product) => timberData[product]?.available
+        (product) => timberData[product]?.available,
       ) || productHierarchy[mainCategory][subcategory][0];
 
     setSubCategory(subcategory);
@@ -303,15 +435,13 @@ export default function TimberProducts() {
 
   // Get only available products from the current subcategory
   const availableProducts = productHierarchy[mainCategory][subCategory].filter(
-    (product) => timberData[product]?.available
+    (product) => timberData[product]?.available,
   );
 
   // Get non-available products from the current subcategory
   const nonAvailableProducts = productHierarchy[mainCategory][
     subCategory
   ].filter((product) => !timberData[product]?.available);
-
-  const currentData = timberData[finalProduct];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -370,9 +500,7 @@ export default function TimberProducts() {
               >
                 <span
                   className={
-                    mainCategory === category
-                      ? "text-black "
-                      : "text-[#674C28]"
+                    mainCategory === category ? "text-black " : "text-[#674C28]"
                   }
                 >
                   {Icons[category]}
@@ -421,7 +549,7 @@ export default function TimberProducts() {
                     >
                       {
                         productHierarchy[mainCategory][sub].filter(
-                          (product) => timberData[product]?.available
+                          (product) => timberData[product]?.available,
                         ).length
                       }
                     </span>
@@ -545,9 +673,7 @@ export default function TimberProducts() {
                       <h3 className="text-3xl font-bold mb-2">
                         {currentData.name}
                       </h3>
-                      <p className="text-[#7A684A] ">
-                        {currentData.origin}
-                      </p>
+                      <p className="text-[#7A684A] ">{currentData.origin}</p>
                     </div>
                     <div className="flex gap-2 flex-wrap">
                       {currentData.applications?.slice(0, 3).map((app, i) => (
@@ -631,7 +757,8 @@ export default function TimberProducts() {
 
                               {/* Image Counter */}
                               <div className="text-center mt-3 text-sm text-gray-500">
-                                {activeImageIndex + 1} / {currentData.images.length}
+                                {activeImageIndex + 1} /{" "}
+                                {currentData.images.length}
                               </div>
                             </div>
                           </div>
@@ -657,16 +784,138 @@ export default function TimberProducts() {
                   >
                     <MOTION.div
                       variants={itemVariants}
-                      className="mb-6 bg-[#F0E5CF]/50  p-5 rounded-xl border border-[#EADCA6] "
+                      className="mb-6 bg-gradient-to-br from-[#F0E5CF]/30 via-white to-[#E5D4B7]/20 p-5 rounded-xl border border-[#EADCA6] relative overflow-hidden"
                     >
-                      <h4 className={`${luxury.textLabel} font-medium mb-3`}>
+                      {/* Decorative wood grain pattern */}
+                      <div className="absolute top-0 right-0 w-32 h-32 opacity-5 pointer-events-none">
+                        <svg viewBox="0 0 100 100" className="w-full h-full">
+                          <path
+                            d="M0,20 Q25,10 50,20 T100,20"
+                            stroke="#674C28"
+                            fill="none"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M0,40 Q25,30 50,40 T100,40"
+                            stroke="#674C28"
+                            fill="none"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M0,60 Q25,50 50,60 T100,60"
+                            stroke="#674C28"
+                            fill="none"
+                            strokeWidth="2"
+                          />
+                          <path
+                            d="M0,80 Q25,70 50,80 T100,80"
+                            stroke="#674C28"
+                            fill="none"
+                            strokeWidth="2"
+                          />
+                        </svg>
+                      </div>
+
+                      <h4
+                        className={`${luxury.textLabel} font-medium mb-3 flex items-center gap-2`}
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                          <path
+                            d="M2 17l10 5 10-5M2 12l10 5 10-5"
+                            opacity="0.6"
+                          />
+                        </svg>
                         Description
                       </h4>
-                      <p
-                        className={`${luxury.textMain} leading-relaxed text-sm`}
+
+                      <div
+                        className="relative overflow-hidden transition-[max-height] duration-500 ease-in-out"
+                        style={{
+                          maxHeight: showFullDescription ? contentHeight : 96,
+                        }}
                       >
-                        {currentData.description}
-                      </p>
+                        <div
+                          ref={descriptionRef}
+                          className={`${luxury.textMain} text-sm leading-relaxed`}
+                         >
+                          {currentData.description
+                            .split("\n\n")
+                            .map((para, index, arr) => (
+                              <React.Fragment key={index}>
+                                <p
+                                  className={`mb-4 ${
+                                    index === 0
+                                      ? "font-medium text-[#4A3B21]"
+                                      : ""
+                                  }`}
+                                  dangerouslySetInnerHTML={{
+                                    __html: highlightKeywords(para),
+                                  }}
+                                />
+
+                                {index < arr.length - 1 && (
+                                  <div className="flex items-center gap-2 my-4">
+                                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#CBB27D]/40 to-transparent"></div>
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[#BFA77A]"></div>
+                                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#CBB27D]/40 to-transparent"></div>
+                                  </div>
+                                )}
+                              </React.Fragment>
+                            ))}
+                        </div>
+
+                        {/* Fade when collapsed */}
+                        {!showFullDescription && (
+                          <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#F0E5CF] via-[#F0E5CF]/60 to-transparent pointer-events-none" />
+                        )}
+                      </div>
+
+                      {/* INLINE Read more / less */}
+                      <span
+                        onClick={() => setShowFullDescription((prev) => !prev)}
+                        className="inline-flex items-center gap-1 mt-3 text-sm font-medium text-[#8B6A2E] hover:text-[#674C28] cursor-pointer select-none transition-colors"
+                      >
+                        {showFullDescription ? (
+                          <>
+                            Read less
+                            <svg
+                              className="w-3 h-3"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                            >
+                              <path
+                                d="M18 15l-6-6-6 6"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </>
+                        ) : (
+                          <>
+                            Read more
+                            <svg
+                              className="w-3 h-3"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                            >
+                              <path
+                                d="M6 9l6 6 6-6"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </>
+                        )}
+                      </span>
                     </MOTION.div>
 
                     <MOTION.div variants={itemVariants} className="mb-6">
