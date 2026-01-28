@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion as MOTION } from "framer-motion";
 import AboutUs from "./AboutUs";
+import GallerySection from "./GallerySection";
 
 export default function Details() {
-  const [showMap, setShowMap] = useState(false);
+  const [mapLocation, setMapLocation] = useState(null);
+
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -36,6 +38,22 @@ export default function Details() {
       transition: { staggerChildren: 0.15 },
     },
   };
+
+  const locations = {
+  bagepalli: {
+    name: "Bagepalli",
+    label: "Main Office & Primary Sawmill",
+    lat: 13.787139,
+    lng: 77.770833,
+  },
+  penukonda: {
+    name: "Penukonda",
+    label: "Secondary Sawmill Unit",
+    lat: 14.074805,
+    lng: 77.602361,
+  },
+};
+
 
   return (
     <div className="bg-gradient-to-b from-[#FAF3E0] via-[#F5EBDF] to-[#F0E2CF] px-6 pt-32 pb-20 space-y-32">
@@ -149,17 +167,27 @@ export default function Details() {
               </p>
 
               <p>
-                Our fully operational sawmill in{" "}
-                <span
-                  onClick={() => setShowMap(true)}
-                  className="inline-flex items-center gap-1 text-[#A0522D] hover:text-[#7B4B2A] cursor-pointer font-semibold transition duration-200 underline decoration-wavy decoration-[#A0522D]/30 hover:decoration-[#A0522D]"
-                >
-                  📍 Penukonda
-                </span>
-                , Andhra Pradesh serves as our central hub, allowing us to craft
-                bespoke timber solutions and ensure prompt delivery throughout
-                India.
-              </p>
+  Our primary operations are headquartered at{" "}
+  <span
+    onClick={() => setMapLocation(locations.bagepalli)}
+    className="inline-flex items-center gap-1 text-[#A0522D] hover:text-[#7B4B2A] cursor-pointer font-semibold transition duration-200 underline decoration-wavy decoration-[#A0522D]/30 hover:decoration-[#A0522D]"
+  >
+    📍 Bagepalli, Karnataka
+  </span>
+  , serving as our main office and central production facility.
+</p>
+
+<p>
+  We also operate a fully functional unit at{" "}
+  <span
+    onClick={() => setMapLocation(locations.penukonda)}
+    className="inline-flex items-center gap-1 text-[#A0522D] hover:text-[#7B4B2A] cursor-pointer font-semibold transition duration-200 underline decoration-wavy decoration-[#A0522D]/30 hover:decoration-[#A0522D]"
+  >
+    📍 Penukonda, Andhra Pradesh
+  </span>
+  , enabling efficient processing and nationwide delivery.
+</p>
+
 
               <p className="bg-gradient-to-r from-[#F5EBDF] to-transparent p-4 rounded-lg border-l-4 border-[#A0522D]">
                 What truly sets SVMT apart is our unwavering commitment to
@@ -195,13 +223,13 @@ export default function Details() {
       </MOTION.div>
 
       {/* ======================= MODAL ======================= */}
-      {showMap && (
+      {mapLocation && (
         <MOTION.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4"
-          onClick={() => setShowMap(false)}
+          onClick={() => setMapLocation(null)}
         >
           <MOTION.div
             initial={{ scale: 0.9, y: 20 }}
@@ -210,24 +238,28 @@ export default function Details() {
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setShowMap(false)}
+              onClick={() => setMapLocation(null)}
               className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-[#A0522D] to-[#7B4B2A] text-white text-2xl font-bold hover:scale-110 transition-transform shadow-xl flex items-center justify-center"
             >
               ×
             </button>
             <h3 className="text-2xl font-playfair font-bold text-[#7B4B2A] mb-4 flex items-center gap-2">
-              <span>📍</span> Our Location - Penukonda
-            </h3>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3853.6926374340475!2d77.5861484146652!3d14.082420991215034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb16e5b8de7c389%3A0x429893fb6e15606f!2sPenukonda%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1682592263695!5m2!1sen!2sin"
-              width="100%"
-              height="450"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              className="rounded-xl shadow-inner"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+  <span>📍</span>
+  {mapLocation.name} – {mapLocation.label}
+</h3>
+
+<iframe
+  src={`https://www.google.com/maps?q=${mapLocation.lat},${mapLocation.lng}&z=16&output=embed`}
+  width="100%"
+  height="450"
+  style={{ border: 0 }}
+  allowFullScreen
+  loading="lazy"
+  className="rounded-xl shadow-inner"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
+
+
           </MOTION.div>
         </MOTION.div>
       )}
@@ -301,68 +333,7 @@ export default function Details() {
       </MOTION.div>
 
       {/* ======================= GALLERY ======================= */}
-      <MOTION.div
-        className="max-w-7xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={staggerContainer}
-      >
-        <MOTION.div variants={fadeInUp} className="text-center mb-16">
-          <h3 className="text-4xl md:text-5xl font-playfair font-extrabold bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] text-transparent bg-clip-text mb-4">
-            Gallery
-          </h3>
-          <div className="w-32 h-1.5 bg-gradient-to-r from-[#7B4B2A] to-[#A0522D] mx-auto rounded-full mb-4"></div>
-          <p className="text-gray-600  max-w-2xl mx-auto">
-            Explore our craftsmanship through these stunning visuals of our
-            timber work and facilities
-          </p>
-        </MOTION.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[...Array(6)].map((_, i) => (
-            <MOTION.div
-              key={i}
-              variants={fadeInUp}
-              whileHover={{ y: -10, scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="group relative rounded-3xl overflow-hidden shadow-xl transform transition-all duration-500"
-            >
-              {/* Animated glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-tr from-[#7B4B2A] via-[#A0522D] to-[#E5B87E] rounded-3xl blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
-
-              {/* Image container */}
-              <div className="relative z-10 rounded-3xl overflow-hidden border-4 border-white/30">
-                <img
-                  src="/img/sawmill.jpg"
-                  alt={`Gallery Image ${i + 1}`}
-                  className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                {/* Number badge */}
-                <MOTION.div
-                  className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center font-bold text-[#A0522D] shadow-lg"
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {i + 1}
-                </MOTION.div>
-
-                {/* Image title overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="text-white font-semibold text-lg">
-                    Gallery Image {i + 1}
-                  </p>
-                  <p className="text-white/80 text-sm">Our Workshop</p>
-                </div>
-              </div>
-            </MOTION.div>
-          ))}
-        </div>
-      </MOTION.div>
+      <GallerySection />
     </div>
   );
 }
