@@ -81,7 +81,7 @@ export default function Navbar() {
     { label: "About Us", type: "scroll", target: "about" },
     { label: "Timber", type: "route", target: "/timber" },
     { label: "Contact", type: "scroll", target: "contact" },
-    { label: "Export", type: "route", target: "/export" },
+    
   ];
 
   /* ===================== JSX ===================== */

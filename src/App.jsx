@@ -8,7 +8,7 @@ import TimberProducts from './components/TimberProducts';
 import ContactUs from './components/ContactUs';
 import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
-import ExportPage from './components/ExportPage';
+// import ExportPage from './components/ExportPage';
 
 function App() {
   return (
@@ -38,7 +38,7 @@ function App() {
         />
 
         <Route path="/about-details" element={<Details />} />
-        <Route path="/export/*" element={<ExportPage />} />
+        {/* <Route path="/export/*" element={<ExportPage />} /> */}
         
         {/* New Timber Products Route */}
         <Route 
