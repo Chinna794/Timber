@@ -26,7 +26,6 @@ export const furnitureImages = [
   "/img/furniture/25.jpg",
   "/img/furniture/26.webp",
   "/img/furniture/27.jpg",
-  "/img/furniture/28.webp",
 ];
 
 export const doorImages = [
